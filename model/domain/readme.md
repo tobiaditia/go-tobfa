@@ -1,0 +1,1 @@
+domain digunakan untuk memetakan masing-masing table di DB ke dalam file

@@ -1,0 +1,428 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Tobfa api",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "localhost:3000"
+        }
+    ],
+    "paths": {
+        "/businesses": {
+            "get": {
+                "security": [
+                    {
+                        "Auth": []
+                    }
+                ],
+                "tags": [
+                    "Businesses"
+                ],
+                "description": "List all Business",
+                "responses": {
+                    "200": {
+                        "description": "Success get data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Business"
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "Auth": []
+                    }
+                ],
+                "tags": [
+                    "Businesses"
+                ],
+                "description": "Create Business",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/BusinessBody"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success create data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Business"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/businesses/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "Auth": []
+                    }
+                ],
+                "tags": [
+                    "Businesses"
+                ],
+                "description": "Find Business",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success get data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Business"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "Auth": []
+                    }
+                ],
+                "tags": [
+                    "Businesses"
+                ],
+                "description": "Update Business",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/BusinessBody"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success get data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Business"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "Auth": []
+                    }
+                ],
+                "tags": [
+                    "Businesses"
+                ],
+                "description": "Delete Business",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success delete data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "Auth": {
+                "type": "apiKey",
+                "in": "header",
+                "name": "X-API-KEY",
+                "description": "Authorization"
+            }
+        },
+        "schemas": {
+            "BusinessBody": {
+                "type": "object",
+                "properties": {
+                    "user_id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "address": {
+                        "type": "string"
+                    },
+                    "business_category_id": {
+                        "type": "integer"
+                    },
+                    "country_id": {
+                        "type": "integer"
+                    },
+                    "province_id": {
+                        "type": "integer"
+                    },
+                    "city_id": {
+                        "type": "integer"
+                    },
+                    "district_id": {
+                        "type": "integer"
+                    },
+                    "village_id": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "Business": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "user_id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "address": {
+                        "type": "string"
+                    },
+                    "business_category_id": {
+                        "type": "integer"
+                    },
+                    "country_id": {
+                        "type": "integer"
+                    },
+                    "province_id": {
+                        "type": "integer"
+                    },
+                    "city_id": {
+                        "type": "integer"
+                    },
+                    "district_id": {
+                        "type": "integer"
+                    },
+                    "village_id": {
+                        "type": "integer"
+                    },
+                    "created_at": {
+                        "type": "string"
+                    },
+                    "updated_at": {
+                        "type": "string"
+                    },
+                    "full_location": {
+                        "type": "string"
+                    },
+                    "stats": {
+                        "type": "object",
+                        "properties": {
+                            "buy": {
+                                "type": "integer"
+                            },
+                            "sell": {
+                                "type": "integer"
+                            }
+                        }
+                    },
+                    "stats2": {
+                        "type": "object",
+                        "properties": {
+                            "buy": {
+                                "type": "integer"
+                            },
+                            "sell": {
+                                "type": "integer"
+                            }
+                        }
+                    },
+                    "province": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "integer"
+                            },
+                            "code": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "city": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "integer"
+                            },
+                            "code": {
+                                "type": "string"
+                            },
+                            "full_code": {
+                                "type": "string"
+                            },
+                            "province_id": {
+                                "type": "integer"
+                            },
+                            "type": {
+                                "type": "integer"
+                            },
+                            "name": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "district": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "integer"
+                            },
+                            "code": {
+                                "type": "string"
+                            },
+                            "full_code": {
+                                "type": "string"
+                            },
+                            "city_id": {
+                                "type": "integer"
+                            },
+                            "name": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "village": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "integer"
+                            },
+                            "code": {
+                                "type": "string"
+                            },
+                            "full_code": {
+                                "type": "string"
+                            },
+                            "pos_code": {
+                                "type": "string"
+                            },
+                            "district_id": {
+                                "type": "integer"
+                            },
+                            "name": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

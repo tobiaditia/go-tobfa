@@ -1,0 +1,3 @@
+###Get All Business
+GET http://localhost:3000/api/businesses
+Accept: application/json
