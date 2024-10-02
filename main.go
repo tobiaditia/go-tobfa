@@ -3,7 +3,9 @@ package main
 import (
 	"go-tobfa/app"
 	"go-tobfa/controller"
+	"go-tobfa/exception"
 	"go-tobfa/helper"
+	"go-tobfa/middleware"
 	"go-tobfa/repository"
 	"go-tobfa/service"
 	"net/http"
@@ -28,9 +30,11 @@ func main() {
 	router.PUT("/api/businesses/:id", businessController.Update)
 	router.DELETE("/api/businesses/:id", businessController.Delete)
 
+	router.PanicHandler = exception.ErrorHandler
+
 	server := http.Server{
 		Addr:    "localhost:3000",
-		Handler: router,
+		Handler: middleware.NewAuthMiddleware(router),
 	}
 
 	err := server.ListenAndServe()

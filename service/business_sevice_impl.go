@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"database/sql"
+	"go-tobfa/exception"
 	"go-tobfa/helper"
 	"go-tobfa/model/domain"
 	"go-tobfa/model/web"
@@ -64,7 +65,9 @@ func (service *BusinessServiceImpl) Update(ctx context.Context, request web.Busi
 	defer helper.CommitOrRollback(tx)
 
 	business, err := service.BusinessRepository.Find(ctx, tx, request.Id)
-	helper.PanicIfError(err)
+	if nil != err {
+		panic(exception.NewNotFoundError(err.Error()))
+	}
 
 	business.UserId = request.UserId
 	business.Name = request.Name
@@ -88,7 +91,9 @@ func (service *BusinessServiceImpl) Delete(ctx context.Context, id int) {
 	defer helper.CommitOrRollback(tx)
 
 	business, err := service.BusinessRepository.Find(ctx, tx, id)
-	helper.PanicIfError(err)
+	if nil != err {
+		panic(exception.NewNotFoundError(err.Error()))
+	}
 
 	service.BusinessRepository.Delete(ctx, tx, business)
 }
@@ -100,7 +105,9 @@ func (service *BusinessServiceImpl) FindById(ctx context.Context, id int) web.Bu
 	defer helper.CommitOrRollback(tx)
 
 	business, err := service.BusinessRepository.Find(ctx, tx, id)
-	helper.PanicIfError(err)
+	if nil != err {
+		panic(exception.NewNotFoundError(err.Error()))
+	}
 
 	return helper.ToBusinessResponse(business)
 }

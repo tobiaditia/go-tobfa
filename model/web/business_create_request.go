@@ -2,7 +2,7 @@ package web
 
 type BusininessCreateRequest struct {
 	UserId             int    `validate:"required" json:"userId"`
-	Name               string `validate:"required, max:100, min:3" json:"name"`
+	Name               string `validate:"required,max=100,min=3" json:"name"`
 	Address            string `validate:"required" json:"address"`
 	BusinessCategoryId int    `validate:"required" json:"businessCategoryId"`
 	CountryId          int    `validate:"required" json:"countryId"`
