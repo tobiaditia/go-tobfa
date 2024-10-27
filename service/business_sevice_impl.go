@@ -26,7 +26,7 @@ func NewBusinessService(businessRepository repository.BusinessRepository, DB *sq
 	}
 }
 
-func (service *BusinessServiceImpl) Create(ctx context.Context, request web.BusininessCreateRequest) web.BusinessResponse {
+func (service *BusinessServiceImpl) Create(ctx context.Context, request web.BusinessCreateRequest) web.BusinessResponse {
 
 	err := service.Validate.Struct(request)
 	helper.PanicIfError(err)
@@ -54,7 +54,7 @@ func (service *BusinessServiceImpl) Create(ctx context.Context, request web.Busi
 
 }
 
-func (service *BusinessServiceImpl) Update(ctx context.Context, request web.BusininessUpdateRequest) web.BusinessResponse {
+func (service *BusinessServiceImpl) Update(ctx context.Context, request web.BusinessUpdateRequest) web.BusinessResponse {
 
 	err := service.Validate.Struct(request)
 	helper.PanicIfError(err)

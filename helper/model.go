@@ -28,3 +28,37 @@ func ToBusinessResponses(businesses []domain.Business) []web.BusinessResponse {
 
 	return businessResponses
 }
+
+func ToBusinessCategoryResponse(businessCategory domain.BusinessCategory) web.BusinessCategoryResponse {
+	return web.BusinessCategoryResponse{
+		Id:   businessCategory.Id,
+		Name: businessCategory.Name,
+	}
+}
+
+func ToBusinessCategoryResponses(businesses []domain.BusinessCategory) []web.BusinessCategoryResponse {
+	var businessCategoryResponses []web.BusinessCategoryResponse
+	for _, business := range businesses {
+		businessCategoryResponses = append(businessCategoryResponses, ToBusinessCategoryResponse(business))
+	}
+
+	return businessCategoryResponses
+}
+
+func ToUserResponse(business domain.User) web.UserResponse {
+	return web.UserResponse{
+		Id:        business.Id,
+		Name:      business.Name,
+		Email:     business.Email,
+		Handphone: business.Handphone,
+	}
+}
+
+func ToUserResponses(users []domain.User) []web.UserResponse {
+	var userResponses []web.UserResponse
+	for _, user := range users {
+		userResponses = append(userResponses, ToUserResponse(user))
+	}
+
+	return userResponses
+}

@@ -3,7 +3,6 @@ package main
 import (
 	"go-tobfa/app"
 	"go-tobfa/controller"
-	"go-tobfa/exception"
 	"go-tobfa/helper"
 	"go-tobfa/middleware"
 	"go-tobfa/repository"
@@ -12,25 +11,26 @@ import (
 
 	"github.com/go-playground/validator/v10"
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/julienschmidt/httprouter"
 )
 
 func main() {
 
 	db := app.NewDB()
 	validate := validator.New()
+
+	userRepository := repository.NewUserRepository()
+	userService := service.NewUserService(userRepository, db, validate)
+	userController := controller.NewUserController(userService)
+
 	buseinessRepository := repository.NewBusinessRepository()
 	buseinessService := service.NewBusinessService(buseinessRepository, db, validate)
 	businessController := controller.NewBusinessController(buseinessService)
 
-	router := httprouter.New()
-	router.GET("/api/businesses", businessController.FindAll)
-	router.GET("/api/businesses/:id", businessController.FindById)
-	router.POST("/api/businesses", businessController.Create)
-	router.PUT("/api/businesses/:id", businessController.Update)
-	router.DELETE("/api/businesses/:id", businessController.Delete)
+	buseinessCategoryRepository := repository.NewBusinessCategoryRepository()
+	buseinessCategoryService := service.NewBusinessCategoryService(buseinessCategoryRepository, db, validate)
+	buseinessCategoryController := controller.NewBusinessCategoryController(buseinessCategoryService)
 
-	router.PanicHandler = exception.ErrorHandler
+	router := app.NewRouter(userController, businessController, buseinessCategoryController)
 
 	server := http.Server{
 		Addr:    "localhost:3000",

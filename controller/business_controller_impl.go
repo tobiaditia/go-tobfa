@@ -21,7 +21,7 @@ func NewBusinessController(businessService service.BusinessService) BusinessCont
 }
 
 func (controller BusinessControllerImpl) Create(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
-	businessCreateRequest := web.BusininessCreateRequest{}
+	businessCreateRequest := web.BusinessCreateRequest{}
 	helper.ReadFromRequestBody(request, &businessCreateRequest)
 
 	businessResponse := controller.BusinessService.Create(request.Context(), businessCreateRequest)
@@ -36,7 +36,7 @@ func (controller BusinessControllerImpl) Create(writer http.ResponseWriter, requ
 }
 
 func (controller BusinessControllerImpl) Update(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
-	businessUpdateRequest := web.BusininessUpdateRequest{}
+	businessUpdateRequest := web.BusinessUpdateRequest{}
 	helper.ReadFromRequestBody(request, &businessUpdateRequest)
 
 	businessId := params.ByName("id")

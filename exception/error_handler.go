@@ -10,6 +10,8 @@ import (
 
 func ErrorHandler(writer http.ResponseWriter, request *http.Request, err interface{}) {
 
+	// panic(err)
+	// fmt.Println(err)
 	if notFoundError(writer, request, err) {
 		return
 	}
