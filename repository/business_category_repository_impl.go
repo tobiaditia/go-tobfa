@@ -14,7 +14,7 @@ func NewBusinessCategoryRepository() BusinessCategoryRepository {
 	return &BusinessCategoryRepositoryImpl{}
 }
 
-func (repository *BusinessCategoryRepositoryImpl) Get(ctx context.Context, tx *sql.Tx) []domain.BusinessCategory {
+func (repository *BusinessCategoryRepositoryImpl) FindAll(ctx context.Context, tx *sql.Tx) []domain.BusinessCategory {
 	sql := "select * from business_categories"
 	rows, err := tx.QueryContext(ctx, sql)
 	helper.PanicIfError(err)

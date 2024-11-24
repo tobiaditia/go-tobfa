@@ -22,15 +22,19 @@ func main() {
 	userService := service.NewUserService(userRepository, db, validate)
 	userController := controller.NewUserController(userService)
 
-	buseinessRepository := repository.NewBusinessRepository()
-	buseinessService := service.NewBusinessService(buseinessRepository, db, validate)
-	businessController := controller.NewBusinessController(buseinessService)
+	businessRepository := repository.NewBusinessRepository()
+	businessService := service.NewBusinessService(businessRepository, db, validate)
+	businessController := controller.NewBusinessController(businessService)
 
-	buseinessCategoryRepository := repository.NewBusinessCategoryRepository()
-	buseinessCategoryService := service.NewBusinessCategoryService(buseinessCategoryRepository, db, validate)
-	buseinessCategoryController := controller.NewBusinessCategoryController(buseinessCategoryService)
+	businessCategoryRepository := repository.NewBusinessCategoryRepository()
+	businessCategoryService := service.NewBusinessCategoryService(businessCategoryRepository, db, validate)
+	businessCategoryController := controller.NewBusinessCategoryController(businessCategoryService)
 
-	router := app.NewRouter(userController, businessController, buseinessCategoryController)
+	businessTransactionRepository := repository.NewBusinessTransactionRepository()
+	businessTransactionService := service.NewBusinessTransactionService(businessTransactionRepository, businessCategoryRepository, db, validate)
+	businessTransactionController := controller.NewBusinessTransactionController(businessTransactionService)
+
+	router := app.NewRouter(userController, businessController, businessCategoryController, businessTransactionController)
 
 	server := http.Server{
 		Addr:    "localhost:3000",

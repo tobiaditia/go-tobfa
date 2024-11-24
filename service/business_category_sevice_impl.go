@@ -30,7 +30,7 @@ func (service *BusinessCategoryServiceImpl) FindAll(ctx context.Context) []web.B
 
 	defer helper.CommitOrRollback(tx)
 
-	businessCategories := service.BusinessCategoryRepository.Get(ctx, tx)
+	businessCategories := service.BusinessCategoryRepository.FindAll(ctx, tx)
 
 	return helper.ToBusinessCategoryResponses(businessCategories)
 }

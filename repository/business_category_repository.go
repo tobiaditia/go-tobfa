@@ -7,5 +7,5 @@ import (
 )
 
 type BusinessCategoryRepository interface {
-	Get(ctx context.Context, tx *sql.Tx) []domain.BusinessCategory
+	FindAll(ctx context.Context, tx *sql.Tx) []domain.BusinessCategory
 }

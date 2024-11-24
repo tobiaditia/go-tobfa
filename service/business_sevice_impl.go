@@ -118,7 +118,7 @@ func (service *BusinessServiceImpl) FindAll(ctx context.Context) []web.BusinessR
 
 	defer helper.CommitOrRollback(tx)
 
-	businesses := service.BusinessRepository.Get(ctx, tx)
+	businesses := service.BusinessRepository.FindAll(ctx, tx)
 
 	return helper.ToBusinessResponses(businesses)
 }

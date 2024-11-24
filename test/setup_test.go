@@ -43,7 +43,11 @@ func setupRouter(db *sql.DB) http.Handler {
 	businessCategoryService := service.NewBusinessCategoryService(businessCategoryRepository, db, validate)
 	businessCategoryController := controller.NewBusinessCategoryController(businessCategoryService)
 
-	router := app.NewRouter(userController, businessController, businessCategoryController)
+	businessTransactionRepository := repository.NewBusinessTransactionRepository()
+	businessTransactionService := service.NewBusinessTransactionService(businessTransactionRepository, businessCategoryRepository, db, validate)
+	businessTransactionController := controller.NewBusinessTransactionController(businessTransactionService)
+
+	router := app.NewRouter(userController, businessController, businessCategoryController, businessTransactionController)
 
 	return middleware.NewAuthMiddleware(router)
 }

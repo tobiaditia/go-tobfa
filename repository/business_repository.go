@@ -7,7 +7,7 @@ import (
 )
 
 type BusinessRepository interface {
-	Get(ctx context.Context, tx *sql.Tx) []domain.Business
+	FindAll(ctx context.Context, tx *sql.Tx) []domain.Business
 	Find(ctx context.Context, tx *sql.Tx, businessId int) (domain.Business, error)
 	Create(ctx context.Context, tx *sql.Tx, business domain.Business) domain.Business
 	Update(ctx context.Context, tx *sql.Tx, business domain.Business) domain.Business
