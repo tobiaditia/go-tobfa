@@ -2,19 +2,14 @@ package helper
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 
 	"github.com/gorilla/schema"
 )
 
 func ReadFromRequestBody(request *http.Request, result interface{}) {
-	fmt.Println("from request body")
-	fmt.Println(request.Body)
 	decoder := json.NewDecoder(request.Body)
-	fmt.Println(decoder)
 	err := decoder.Decode(result)
-	fmt.Println(result)
 	PanicIfError(err)
 }
 

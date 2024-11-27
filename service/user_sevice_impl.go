@@ -36,6 +36,11 @@ func (service *UserServiceImpl) Create(ctx context.Context, request web.UserCrea
 
 	defer helper.CommitOrRollback(tx)
 
+	_, err = service.UserRepository.FindByEmail(ctx, tx, request.Email)
+	if err == nil {
+		panic(exception.NewAlreadyExistsError("Email sudah digunakan!"))
+	}
+
 	user := domain.User{
 		Name:      request.Name,
 		Email:     request.Email,

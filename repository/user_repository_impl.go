@@ -39,6 +39,30 @@ func (repository *UserRepositoryImpl) FindById(ctx context.Context, tx *sql.Tx, 
 	}
 }
 
+func (repository *UserRepositoryImpl) FindByEmail(ctx context.Context, tx *sql.Tx, email string) (domain.User, error) {
+	sql := "select * from users where email = ?"
+	rows, err := tx.QueryContext(ctx, sql, email)
+	helper.PanicIfError(err)
+	defer rows.Close()
+
+	user := domain.User{}
+
+	if rows.Next() {
+		err := rows.Scan(
+			&user.Id,
+			&user.Name,
+			&user.Email,
+			&user.Password,
+			&user.Handphone,
+			&user.CreatedAt,
+			&user.UpdatedAt)
+		helper.PanicIfError(err)
+		return user, nil
+	} else {
+		return user, errors.New("not found data")
+	}
+}
+
 func (repository *UserRepositoryImpl) Create(ctx context.Context, tx *sql.Tx, user domain.User) domain.User {
 	sql := "insert into users (name, email, password, handphone, created_at, updated_at) values (?,?,?,?, NOW(), NOW())"
 	result, err := tx.ExecContext(ctx, sql, user.Name, user.Email, user.Password, user.Handphone)
