@@ -47,11 +47,11 @@ func (controller BusinessTransactionControllerImpl) FindById(writer http.Respons
 }
 
 func (controller BusinessTransactionControllerImpl) FindByBusiness(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
-	businessId := params.ByName("businessId")
+	businessId := params.ByName("id")
 	id, err := strconv.Atoi(businessId)
 	helper.PanicIfError(err)
 
-	businessResponse := controller.BusinessTransactionService.FindById(request.Context(), id)
+	businessResponse := controller.BusinessTransactionService.FindByBusiness(request.Context(), id)
 	webResponse := web.WebResponse{
 		Code:   200,
 		Status: "OK",

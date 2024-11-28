@@ -1,0 +1,586 @@
+{
+	"info": {
+		"_postman_id": "966747c8-23ab-4340-883c-ea70e3909110",
+		"name": "Go Tobfa",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12793329"
+	},
+	"item": [
+		{
+			"name": "Businesses",
+			"item": [
+				{
+					"name": "Find All",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-API-Key",
+								"value": "sosecret",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/businesses",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"businesses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-API-Key",
+								"value": "sosecret",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": 1,\n    \"name\": \"1a\",\n    \"address\": \"1aa\",\n    \"businessCategoryId\": 1,\n    \"countryId\": 1,\n    \"provinceId\": 1,\n    \"cityId\": 1,\n    \"districtId\": 1,\n    \"villageId\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/businesses",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"businesses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/businesses/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"businesses",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/businesses/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"businesses",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-API-Key",
+								"value": "sosecret",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": 1,\n    \"name\": \"1aad4\",\n    \"address\": \"1aa\",\n    \"businessCategoryId\": 1,\n    \"countryId\": 1,\n    \"provinceId\": 1,\n    \"cityId\": 1,\n    \"districtId\": 1,\n    \"villageId\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/businesses/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"businesses",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Businesses Transaction",
+			"item": [
+				{
+					"name": "Find All",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-API-Key",
+								"value": "sosecret",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/businessTransactions",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"businessTransactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find By Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-API-Key",
+								"value": "sosecret",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/businessTransactions/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"businessTransactions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find By Business Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-API-Key",
+								"value": "sosecret",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/businessTransactions/:id/business",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"businessTransactions",
+								":id",
+								"business"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Stats",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-API-Key",
+								"value": "sosecret",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/businessTransactionsStats?dateStarted=2024-01-01&dateEnded=2024-12-01&businessTransactionTypeId=1&businessTransactionItemId=1&provinceId=1&cityId=1&districtId=1&villageId=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"businessTransactionsStats"
+							],
+							"query": [
+								{
+									"key": "dateStarted",
+									"value": "2024-01-01"
+								},
+								{
+									"key": "dateEnded",
+									"value": "2024-12-01"
+								},
+								{
+									"key": "businessTransactionTypeId",
+									"value": "1"
+								},
+								{
+									"key": "businessTransactionItemId",
+									"value": "1"
+								},
+								{
+									"key": "provinceId",
+									"value": "1"
+								},
+								{
+									"key": "cityId",
+									"value": "1"
+								},
+								{
+									"key": "districtId",
+									"value": "1"
+								},
+								{
+									"key": "villageId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-API-Key",
+								"value": "sosecret",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"businessId\":1,\n    \"businessTransactionTypeId\":1,\n    \"businessTransactionItemId\":1,\n    \"total\":1,\n    \"multiplier\":1,\n    \"date\":\"2024-01-01\",\n    \"description\":\"sss\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/businessTransactions",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"businessTransactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-API-Key",
+								"value": "sosecret",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/businessTransactions/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"businessTransactions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-API-Key",
+								"value": "sosecret",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"businessId\":1,\n    \"businessTransactionTypeId\":1,\n    \"businessTransactionItemId\":1,\n    \"total\":1,\n    \"multiplier\":1,\n    \"date\":\"2024-01-01\",\n    \"description\":\"ssds\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/businessTransactions/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"businessTransactions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-API-Key",
+								"value": "sosecret",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"tobi\",\n    \"email\":\"tobiaditia54913@gmail.com\",\n    \"password\":\"12345678\",\n    \"handphone\":\"085895402090\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/users",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find By Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-API-Key",
+								"value": "sosecret",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/businesses/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"businesses",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "41"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-API-Key",
+								"value": "sosecret",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/users/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "7"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-API-Key",
+								"value": "sosecret",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/users/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Businesses Categories",
+			"item": [
+				{
+					"name": "Find All",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-API-Key",
+								"value": "sosecret",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/businessCategories",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"businessCategories"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost:3000",
+			"type": "default"
+		}
+	]
+}

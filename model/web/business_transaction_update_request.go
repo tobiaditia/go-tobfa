@@ -2,7 +2,7 @@ package web
 
 type BusinessTransactionUpdateRequest struct {
 	Id                        int
-	BusinessId                int    `validate:"required,max=100,min=3" json:"businessId"`
+	BusinessId                int    `validate:"required" json:"businessId"`
 	BusinessTransactionTypeId int    `validate:"required" json:"businessTransactionTypeId"`
 	BusinessTransactionItemId int    `validate:"required" json:"businessTransactionItemId"`
 	Total                     int    `validate:"required" json:"total"`

@@ -165,7 +165,7 @@ func (repository *BusinessTransactionRepositoryImpl) FindForStats(ctx context.Co
 }
 
 func (repository *BusinessTransactionRepositoryImpl) Create(ctx context.Context, tx *sql.Tx, businessTransaction domain.BusinessTransaction) domain.BusinessTransaction {
-	sql := "insert into business_transactions (user_id, name, address, business_category_id, country_id, province_id, city_id, district_id, village_id, created_at, updated_at) values (?,?,?,?,?,?,?,?,?, NOW(), NOW())"
+	sql := "insert into business_transactions (business_id, business_transaction_type_id, business_transaction_item_id, total, multiplier, date, description, created_at, updated_at) values (?,?,?,?,?,?,?, NOW(), NOW())"
 	result, err := tx.ExecContext(ctx, sql, businessTransaction.BusinessId, businessTransaction.BusinessTransactionTypeId, businessTransaction.BusinessTransactionItemId, businessTransaction.Total, businessTransaction.Multiplier, businessTransaction.Date, businessTransaction.Description)
 	helper.PanicIfError(err)
 
@@ -177,7 +177,7 @@ func (repository *BusinessTransactionRepositoryImpl) Create(ctx context.Context,
 }
 
 func (repository *BusinessTransactionRepositoryImpl) Update(ctx context.Context, tx *sql.Tx, businessTransaction domain.BusinessTransaction) domain.BusinessTransaction {
-	sql := "update business_transactions set user_id = ?, name = ?, address = ?, business_category_id = ?, country_id = ?, province_id = ?, city_id = ?, district_id = ?, village_id = ?, updated_at = NOW() where id = ?"
+	sql := "update business_transactions set business_id = ?, business_transaction_type_id = ?, business_transaction_item_id = ?, total = ?, multiplier = ?, date = ?, description = ?, updated_at = NOW() where id = ?"
 	_, err := tx.ExecContext(ctx, sql, businessTransaction.BusinessId, businessTransaction.BusinessTransactionTypeId, businessTransaction.BusinessTransactionItemId, businessTransaction.Total, businessTransaction.Multiplier, businessTransaction.Date, businessTransaction.Description, businessTransaction.Id)
 	helper.PanicIfError(err)
 

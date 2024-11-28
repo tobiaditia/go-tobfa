@@ -13,6 +13,7 @@ func NewRouter(userController controller.UserController, businessController cont
 	router.POST("/api/users", userController.Create)
 	router.PUT("/api/users/:id", userController.Update)
 	router.GET("/api/users/:id", userController.FindById)
+	router.DELETE("/api/users/:id", userController.Delete)
 
 	router.GET("/api/businesses", businessController.FindAll)
 	router.GET("/api/businesses/:id", businessController.FindById)
