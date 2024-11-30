@@ -31,23 +31,15 @@ func setupRouter(db *sql.DB) http.Handler {
 
 	validate := validator.New()
 
-	userRepository := repository.NewUserRepository()
-	userService := service.NewUserService(userRepository, db, validate)
-	userController := controller.NewUserController(userService)
+	controllers := controller.Controller{
+		User:                controller.NewUserController(service.NewUserService(repository.NewUserRepository(), db, validate)),
+		Location:            controller.NewLocationController(service.NewLocationService(repository.NewLocationRepository(), db, validate)),
+		Business:            controller.NewBusinessController(service.NewBusinessService(repository.NewBusinessRepository(), db, validate)),
+		BusinessCategory:    controller.NewBusinessCategoryController(service.NewBusinessCategoryService(repository.NewBusinessCategoryRepository(), db, validate)),
+		BusinessTransaction: controller.NewBusinessTransactionController(service.NewBusinessTransactionService(repository.NewBusinessTransactionRepository(), repository.NewBusinessCategoryRepository(), db, validate)),
+	}
 
-	businessRepository := repository.NewBusinessRepository()
-	businessService := service.NewBusinessService(businessRepository, db, validate)
-	businessController := controller.NewBusinessController(businessService)
-
-	businessCategoryRepository := repository.NewBusinessCategoryRepository()
-	businessCategoryService := service.NewBusinessCategoryService(businessCategoryRepository, db, validate)
-	businessCategoryController := controller.NewBusinessCategoryController(businessCategoryService)
-
-	businessTransactionRepository := repository.NewBusinessTransactionRepository()
-	businessTransactionService := service.NewBusinessTransactionService(businessTransactionRepository, businessCategoryRepository, db, validate)
-	businessTransactionController := controller.NewBusinessTransactionController(businessTransactionService)
-
-	router := app.NewRouter(userController, businessController, businessCategoryController, businessTransactionController)
+	router := app.NewRouter(controllers)
 
 	return middleware.NewAuthMiddleware(router)
 }

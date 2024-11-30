@@ -108,3 +108,79 @@ func ToBusinessTransactionStatResponse(averange int, stats []domain.Stat, busine
 		Stats:            ToStatResponses(stats),
 	}
 }
+
+func ToProvinceResponse(province domain.Province) web.ProvinceResponse {
+	return web.ProvinceResponse{
+		Id:   province.Id,
+		Name: province.Name,
+	}
+}
+
+func ToProvinceResponses(provinces []domain.Province) []web.ProvinceResponse {
+	var provinceResponses []web.ProvinceResponse
+	for _, province := range provinces {
+		provinceResponses = append(provinceResponses, ToProvinceResponse(province))
+	}
+
+	return provinceResponses
+}
+
+func ToCityResponse(city domain.City) web.CityResponse {
+	return web.CityResponse{
+		Id:         city.Id,
+		Code:       city.Code,
+		FullCode:   city.FullCode,
+		ProvinceId: city.ProvinceId,
+		Type:       city.Type,
+		Name:       city.Name,
+	}
+}
+
+func ToCityResponses(cities []domain.City) []web.CityResponse {
+	var cityResponses []web.CityResponse
+	for _, city := range cities {
+		cityResponses = append(cityResponses, ToCityResponse(city))
+	}
+
+	return cityResponses
+}
+
+func ToDistrictResponse(district domain.District) web.DistrictResponse {
+	return web.DistrictResponse{
+		Id:       district.Id,
+		Code:     district.Code,
+		FullCode: district.FullCode,
+		CityId:   district.CityId,
+		Name:     district.Name,
+	}
+}
+
+func ToDistrictResponses(districts []domain.District) []web.DistrictResponse {
+	var districtResponses []web.DistrictResponse
+	for _, district := range districts {
+		districtResponses = append(districtResponses, ToDistrictResponse(district))
+	}
+
+	return districtResponses
+}
+
+func ToVillageResponse(village domain.Village) web.VillageResponse {
+	return web.VillageResponse{
+		Id:         village.Id,
+		Code:       village.Code,
+		FullCode:   village.FullCode,
+		PosCode:    village.PosCode,
+		DistrictId: village.DistrictId,
+		Name:       village.Name,
+		FullName:   "a",
+	}
+}
+
+func ToVillageResponses(villages []domain.Village) []web.VillageResponse {
+	var villageResponses []web.VillageResponse
+	for _, village := range villages {
+		villageResponses = append(villageResponses, ToVillageResponse(village))
+	}
+
+	return villageResponses
+}
