@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"database/sql"
+	"fmt"
 	"go-tobfa/helper"
 	"go-tobfa/model/web"
 	"go-tobfa/repository"
@@ -63,9 +64,22 @@ func (service *LocationServiceImpl) Villages(ctx context.Context, districtId int
 
 	defer helper.CommitOrRollback(tx)
 
-	response := service.LocationRepository.Villages(ctx, tx, districtId)
+	villages := service.LocationRepository.Villages(ctx, tx, districtId)
+	district, err := service.LocationRepository.DistrictFindById(ctx, tx, districtId)
+	helper.PanicIfError(err)
+	city, err := service.LocationRepository.CityFindById(ctx, tx, district.CityId)
+	helper.PanicIfError(err)
+	province, err := service.LocationRepository.ProvinceFindById(ctx, tx, city.ProvinceId)
+	helper.PanicIfError(err)
 
-	return helper.ToVillageResponses(response)
+	var responses []web.VillageResponse
+	for _, village := range villages {
+		villageResponse := helper.ToVillageResponse(village)
+		villageResponse.FullName = fmt.Sprintf("%s - %s - %s - %s ( %s )", province.Name, city.Name, district.Name, village.Name, village.Code)
+		responses = append(responses, villageResponse)
+	}
+
+	return responses
 }
 
 func (service *LocationServiceImpl) Search(ctx context.Context, search string) []web.VillageResponse {
@@ -74,7 +88,22 @@ func (service *LocationServiceImpl) Search(ctx context.Context, search string) [
 
 	defer helper.CommitOrRollback(tx)
 
-	response := service.LocationRepository.Search(ctx, tx, search)
+	villages := service.LocationRepository.Search(ctx, tx, search)
 
-	return helper.ToVillageResponses(response)
+	var responses []web.VillageResponse
+	for _, village := range villages {
+
+		district, err := service.LocationRepository.DistrictFindById(ctx, tx, village.DistrictId)
+		helper.PanicIfError(err)
+		city, err := service.LocationRepository.CityFindById(ctx, tx, district.CityId)
+		helper.PanicIfError(err)
+		province, err := service.LocationRepository.ProvinceFindById(ctx, tx, city.ProvinceId)
+		helper.PanicIfError(err)
+
+		villageResponse := helper.ToVillageResponse(village)
+		villageResponse.FullName = fmt.Sprintf("%s - %s - %s - %s ( %s )", province.Name, city.Name, district.Name, village.Name, village.Code)
+		responses = append(responses, villageResponse)
+	}
+
+	return responses
 }
