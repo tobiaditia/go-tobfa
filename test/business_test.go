@@ -4,7 +4,6 @@ import (
 	"context"
 	"database/sql"
 	"encoding/json"
-	"fmt"
 	"go-tobfa/model/domain"
 	"go-tobfa/repository"
 	"io"
@@ -54,7 +53,6 @@ func TestCreateBusinessSuccess(t *testing.T) {
 	body, _ := io.ReadAll(response.Body)
 	var responseBody map[string]interface{}
 	json.Unmarshal(body, &responseBody)
-	// fmt.Println(responseBody)
 
 	responseBodyData := responseBody["data"]
 	assert.Equal(t, "OK", responseBody["status"])
@@ -92,7 +90,6 @@ func TestCreateBusinessErrorValidation(t *testing.T) {
 	body, _ := io.ReadAll(response.Body)
 	var responseBody map[string]interface{}
 	json.Unmarshal(body, &responseBody)
-	// fmt.Println(responseBody)
 
 	assert.Equal(t, "BAD REQUEST", responseBody["status"])
 }
@@ -144,7 +141,6 @@ func TestUpdateBusinessSuccess(t *testing.T) {
 	body, _ := io.ReadAll(response.Body)
 	var responseBody map[string]interface{}
 	json.Unmarshal(body, &responseBody)
-	// fmt.Println(responseBody)
 
 	responseBodyData := responseBody["data"]
 	assert.Equal(t, "OK", responseBody["status"])
@@ -198,7 +194,6 @@ func TestUpdateBusinessErrorValidation(t *testing.T) {
 	body, _ := io.ReadAll(response.Body)
 	var responseBody map[string]interface{}
 	json.Unmarshal(body, &responseBody)
-	// fmt.Println(responseBody)
 
 	assert.Equal(t, "BAD REQUEST", responseBody["status"])
 }
@@ -349,7 +344,6 @@ func TestDeleteBusinessSuccess(t *testing.T) {
 	body, _ := io.ReadAll(response.Body)
 	var responseBody map[string]interface{}
 	json.Unmarshal(body, &responseBody)
-	fmt.Println(responseBody)
 
 	assert.Equal(t, "OK", responseBody["status"])
 

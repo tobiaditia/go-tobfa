@@ -21,7 +21,7 @@ func main() {
 	controllers := controller.Controller{
 		User:                controller.NewUserController(service.NewUserService(repository.NewUserRepository(), db, validate)),
 		Location:            controller.NewLocationController(service.NewLocationService(repository.NewLocationRepository(), db, validate)),
-		Business:            controller.NewBusinessController(service.NewBusinessService(repository.NewBusinessRepository(), db, validate)),
+		Business:            controller.NewBusinessController(service.NewBusinessService(repository.NewBusinessRepository(), repository.NewBusinessTransactionItemRepository(), db, validate)),
 		BusinessCategory:    controller.NewBusinessCategoryController(service.NewBusinessCategoryService(repository.NewBusinessCategoryRepository(), db, validate)),
 		BusinessTransaction: controller.NewBusinessTransactionController(service.NewBusinessTransactionService(repository.NewBusinessTransactionRepository(), repository.NewBusinessCategoryRepository(), db, validate)),
 	}

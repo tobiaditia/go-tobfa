@@ -93,3 +93,17 @@ func (controller BusinessControllerImpl) FindAll(writer http.ResponseWriter, req
 
 	helper.WriteToResponseBody(writer, webResponse)
 }
+
+func (controller BusinessControllerImpl) Stats(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
+	businessStatsGetRequest := web.BusinessStatsGetRequest{}
+	helper.ReadFromURLQuery(request, &businessStatsGetRequest)
+
+	businessResponses := controller.BusinessService.Stats(request.Context(), businessStatsGetRequest)
+	webResponse := web.WebResponse{
+		Code:   200,
+		Status: "OK",
+		Data:   businessResponses,
+	}
+
+	helper.WriteToResponseBody(writer, webResponse)
+}

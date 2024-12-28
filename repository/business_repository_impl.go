@@ -16,8 +16,9 @@ func NewBusinessRepository() BusinessRepository {
 }
 
 func (repository *BusinessRepositoryImpl) FindAll(ctx context.Context, tx *sql.Tx) []domain.Business {
-	sql := "select * from businesses"
-	rows, err := tx.QueryContext(ctx, sql)
+	userId := 1
+	sql := "select * from businesses where user_id = ?"
+	rows, err := tx.QueryContext(ctx, sql, userId)
 	helper.PanicIfError(err)
 	defer rows.Close()
 
@@ -70,6 +71,45 @@ func (repository *BusinessRepositoryImpl) Find(ctx context.Context, tx *sql.Tx, 
 		return business, nil
 	} else {
 		return business, errors.New("not found data")
+	}
+}
+
+func (repository *BusinessRepositoryImpl) FindByIds(ctx context.Context, tx *sql.Tx, businessIds *[]int) []domain.Business {
+	if businessIds == nil || len(*businessIds) == 0 {
+		return repository.FindAll(ctx, tx)
+	} else {
+		userId := 1
+		var rows *sql.Rows
+		var err error
+		// Convert businessIds slice to a string suitable for SQL IN clause
+		businessIdsParse := helper.ConvertListOfIntToString(*businessIds)
+		sql := "SELECT * FROM businesses WHERE user_id = ? AND id IN (?)"
+		rows, err = tx.QueryContext(ctx, sql, userId, businessIdsParse)
+
+		helper.PanicIfError(err)
+		defer rows.Close()
+
+		var businesses []domain.Business
+		for rows.Next() {
+			business := domain.Business{}
+			err := rows.Scan(
+				&business.Id,
+				&business.UserId,
+				&business.Name,
+				&business.Address,
+				&business.BusinessCategoryId,
+				&business.CountryId,
+				&business.ProvinceId,
+				&business.CityId,
+				&business.DistrictId,
+				&business.VillageId,
+				&business.CreatedAt,
+				&business.UpdatedAt)
+			helper.PanicIfError(err)
+			businesses = append(businesses, business)
+		}
+
+		return businesses
 	}
 }
 

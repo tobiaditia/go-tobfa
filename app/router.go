@@ -26,6 +26,7 @@ func NewRouter(controllers controller.Controller) *httprouter.Router {
 	router.POST("/api/businesses", controllers.Business.Create)
 	router.PUT("/api/businesses/:id", controllers.Business.Update)
 	router.DELETE("/api/businesses/:id", controllers.Business.Delete)
+	router.GET("/api/businessesStats", controllers.Business.Stats)
 
 	router.GET("/api/businessCategories", controllers.BusinessCategory.FindAll)
 

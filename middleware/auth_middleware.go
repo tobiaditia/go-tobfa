@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"fmt"
 	"go-tobfa/helper"
 	"go-tobfa/model/web"
 	"net/http"
@@ -71,8 +70,8 @@ func isRouteMatch(checkPath string, realPath string) bool {
 	realPathRegex := re.ReplaceAllString(realPath, "/1")
 
 	// Match the generated regex with the request path
-	fmt.Println(realPathRegex)
-	fmt.Println(checkPath)
+	// fmt.Println(realPathRegex)
+	// fmt.Println(checkPath)
 	matched, _ := regexp.MatchString(realPathRegex, checkPath)
 	return matched
 }

@@ -12,4 +12,5 @@ type BusinessController interface {
 	Delete(writer http.ResponseWriter, request *http.Request, param httprouter.Params)
 	FindById(writer http.ResponseWriter, request *http.Request, param httprouter.Params)
 	FindAll(writer http.ResponseWriter, request *http.Request, param httprouter.Params)
+	Stats(writer http.ResponseWriter, request *http.Request, param httprouter.Params)
 }

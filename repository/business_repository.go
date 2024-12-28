@@ -9,6 +9,7 @@ import (
 type BusinessRepository interface {
 	FindAll(ctx context.Context, tx *sql.Tx) []domain.Business
 	Find(ctx context.Context, tx *sql.Tx, businessId int) (domain.Business, error)
+	FindByIds(ctx context.Context, tx *sql.Tx, businessIds *[]int) []domain.Business
 	Create(ctx context.Context, tx *sql.Tx, business domain.Business) domain.Business
 	Update(ctx context.Context, tx *sql.Tx, business domain.Business) domain.Business
 	Delete(ctx context.Context, tx *sql.Tx, business domain.Business)

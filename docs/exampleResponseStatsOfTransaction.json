@@ -1,0 +1,127 @@
+{
+    "name": "Stats of transactions",
+    "dateStarted": "2024-01-01",
+    "dateEnded": "2024-12-01",
+    "userId": 1,
+    "businessTransactionTypeId": null,
+    "businessTransactionItemId": null,
+    "bussinesses": [
+        {
+            "id": 1,
+            "name": "Business A",
+            "businessTransactionItems": [
+                {
+                    "name": "Pakan",
+                    "businessTransactionType": [
+                        {
+                            "name": "Sell",
+                            "stats": [
+                                {
+                                    "date": "2024-02-01",
+                                    "total": 20000
+                                },
+                                {
+                                    "date": "2024-03-01",
+                                    "total": 20000
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Buy",
+                            "stats": [
+                                {
+                                    "date": "2024-02-01",
+                                    "total": 10000
+                                }
+                            ]
+                        }
+                    ],
+                    "total": 30000,
+                    "totalSell": 40000,
+                    "totalBuy": 10000
+                }
+            ],
+            "total": 30000,
+            "totalSell": 40000,
+            "totalBuy": 10000
+        },
+        {
+            "id": 2,
+            "name": "Business B",
+            "businessTransactionItems": [
+                {
+                    "name": "Pakan",
+                    "businessTransactionTypes": [
+                        {
+                            "name": "Sell",
+                            "stats": [
+                                {
+                                    "date": "2024-02-15",
+                                    "total": 20000
+                                },
+                                {
+                                    "date": "2024-03-15",
+                                    "total": 20000
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Buy",
+                            "stats": [
+                                {
+                                    "date": "2024-02-15",
+                                    "total": 10000
+                                }
+                            ]
+                        }
+                    ],
+                    "total": 30000,
+                    "totalSell": 40000,
+                    "totalBuy": 10000
+                }
+            ],
+            "total": 30000,
+            "totalSell": 40000,
+            "totalBuy": 10000
+        }
+    ],
+    "businessTransactionType": [
+        {
+            "name": "Sell",
+            "stats": [
+                {
+                    "date": "2024-02-01",
+                    "total": 20000
+                },
+                {
+                    "date": "2024-03-01",
+                    "total": 20000
+                },
+                {
+                    "date": "2024-02-15",
+                    "total": 20000
+                },
+                {
+                    "date": "2024-03-15",
+                    "total": 20000
+                }
+            ]
+        },
+        {
+            "name": "Buy",
+            "stats": [
+                {
+                    "date": "2024-02-15",
+                    "total": 10000
+                },
+                {
+                    "date": "2024-02-01",
+                    "total": 10000
+                }
+            ]
+        }
+    ],
+    "total": 60000,
+    "totalSell": 80000,
+    "totalBuy": 20000
+}

@@ -48,7 +48,6 @@ func TestCreateUserSuccess(t *testing.T) {
 	body, _ := io.ReadAll(response.Body)
 	var responseBody map[string]interface{}
 	json.Unmarshal(body, &responseBody)
-	// fmt.Println(responseBody)
 
 	responseBodyData := responseBody["data"]
 	assert.Equal(t, "OK", responseBody["status"])
@@ -81,7 +80,6 @@ func TestCreateUserErrorValidation(t *testing.T) {
 	body, _ := io.ReadAll(response.Body)
 	var responseBody map[string]interface{}
 	json.Unmarshal(body, &responseBody)
-	// fmt.Println(responseBody)
 
 	assert.Equal(t, "BAD REQUEST", responseBody["status"])
 }
@@ -121,7 +119,6 @@ func TestUpdateUserSuccess(t *testing.T) {
 	body, _ := io.ReadAll(response.Body)
 	var responseBody map[string]interface{}
 	json.Unmarshal(body, &responseBody)
-	// fmt.Println(responseBody)
 
 	responseBodyData := responseBody["data"]
 	assert.Equal(t, "OK", responseBody["status"])
@@ -163,7 +160,6 @@ func TestUpdateUserErrorValidation(t *testing.T) {
 	body, _ := io.ReadAll(response.Body)
 	var responseBody map[string]interface{}
 	json.Unmarshal(body, &responseBody)
-	// fmt.Println(responseBody)
 
 	assert.Equal(t, "BAD REQUEST", responseBody["status"])
 }
@@ -266,7 +262,6 @@ func TestFindUserFailed(t *testing.T) {
 // 	body, _ := io.ReadAll(response.Body)
 // 	var responseBody map[string]interface{}
 // 	json.Unmarshal(body, &responseBody)
-// 	fmt.Println(responseBody)
 
 // 	assert.Equal(t, "OK", responseBody["status"])
 
