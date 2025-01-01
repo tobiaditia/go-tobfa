@@ -20,6 +20,17 @@ func NewUserController(userService service.UserService) UserController {
 	}
 }
 
+// @Tags         Users
+// @Summary      Create Users
+// @Description  Create Users
+// @Accept       json
+// @Produce      json
+// @Param        body	body		web.UserCreateRequest	true	"Body"
+// @Success      200  {object}  web.WebResponse{data=web.UserResponse}
+// @Failure      400  {object}  web.WebResponse{code=integer,status=string,data=[]string}
+// @Failure      404  {object}  web.WebResponse{code=integer,status=string,data=[]string}
+// @Failure      500  {object}  web.WebResponse{code=integer,status=string,data=[]string}
+// @Router       /users [post]
 func (controller UserControllerImpl) Create(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	userCreateRequest := web.UserCreateRequest{}
 	helper.ReadFromRequestBody(request, &userCreateRequest)
@@ -35,6 +46,15 @@ func (controller UserControllerImpl) Create(writer http.ResponseWriter, request 
 
 }
 
+// @Tags         Users
+// @Summary      Update Users
+// @Description  Update Users
+// @Accept       json
+// @Produce      json
+// @Param        id   path      int  true  "ID"
+// @Param        body	body		web.UserUpdateRequest	true	"Body"
+// @Success      200  {object}  web.WebResponse{data=web.UserResponse}
+// @Router       /users/{id} [put]
 func (controller UserControllerImpl) Update(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	userUpdateRequest := web.UserUpdateRequest{}
 	helper.ReadFromRequestBody(request, &userUpdateRequest)
@@ -42,9 +62,8 @@ func (controller UserControllerImpl) Update(writer http.ResponseWriter, request 
 	userId := params.ByName("id")
 	id, err := strconv.Atoi(userId)
 	helper.PanicIfError(err)
-	userUpdateRequest.Id = id
 
-	userResponse := controller.UserService.Update(request.Context(), userUpdateRequest)
+	userResponse := controller.UserService.Update(request.Context(), id, userUpdateRequest)
 	webResponse := web.WebResponse{
 		Code:   200,
 		Status: "OK",
@@ -54,6 +73,14 @@ func (controller UserControllerImpl) Update(writer http.ResponseWriter, request 
 	helper.WriteToResponseBody(writer, webResponse)
 }
 
+// @Tags         Users
+// @Summary      Delete Users
+// @Description  Delete Users
+// @Accept       json
+// @Produce      json
+// @Param        id   path      int  true  "ID"
+// @Success      200  {object}  web.WebResponse
+// @Router       /users/{id} [delete]
 func (controller UserControllerImpl) Delete(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	userId := params.ByName("id")
 	id, err := strconv.Atoi(userId)
@@ -68,6 +95,14 @@ func (controller UserControllerImpl) Delete(writer http.ResponseWriter, request 
 	helper.WriteToResponseBody(writer, webResponse)
 }
 
+// @Tags         Users
+// @Summary      Find Users
+// @Description  Find Users
+// @Accept       json
+// @Produce      json
+// @Param        id   path      int  true  "ID"
+// @Success      200  {object}  web.WebResponse{data=web.UserResponse}
+// @Router       /users/{id} [get]
 func (controller UserControllerImpl) FindById(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	userId := params.ByName("id")
 	id, err := strconv.Atoi(userId)

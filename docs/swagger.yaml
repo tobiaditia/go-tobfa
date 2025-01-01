@@ -1,0 +1,220 @@
+basePath: /api
+definitions:
+  web.UserCreateRequest:
+    properties:
+      email:
+        example: me@tobfa.id
+        type: string
+      handphone:
+        example: "08510101010"
+        maxLength: 14
+        minLength: 11
+        type: string
+      name:
+        example: tobfa
+        maxLength: 100
+        minLength: 3
+        type: string
+      password:
+        example: "12345678"
+        type: string
+    required:
+    - email
+    - handphone
+    - name
+    - password
+    type: object
+  web.UserResponse:
+    properties:
+      email:
+        type: string
+      handphone:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+  web.UserUpdateRequest:
+    properties:
+      handphone:
+        maxLength: 14
+        minLength: 11
+        type: string
+      name:
+        maxLength: 100
+        minLength: 3
+        type: string
+    required:
+    - handphone
+    - name
+    type: object
+  web.WebResponse:
+    properties:
+      code:
+        type: integer
+      data: {}
+      status:
+        type: string
+    type: object
+host: localhost:3000
+info:
+  contact:
+    email: tobiaditia549@gmail.com
+    name: Tobi
+  title: Tobfa API
+  version: "1.0"
+paths:
+  /users:
+    post:
+      consumes:
+      - application/json
+      description: Create Users
+      parameters:
+      - description: Body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/web.UserCreateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/web.WebResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/web.UserResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            allOf:
+            - $ref: '#/definitions/web.WebResponse'
+            - properties:
+                code:
+                  type: integer
+                data:
+                  items:
+                    type: string
+                  type: array
+                status:
+                  type: string
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            allOf:
+            - $ref: '#/definitions/web.WebResponse'
+            - properties:
+                code:
+                  type: integer
+                data:
+                  items:
+                    type: string
+                  type: array
+                status:
+                  type: string
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            allOf:
+            - $ref: '#/definitions/web.WebResponse'
+            - properties:
+                code:
+                  type: integer
+                data:
+                  items:
+                    type: string
+                  type: array
+                status:
+                  type: string
+              type: object
+      summary: Create Users
+      tags:
+      - Users
+  /users/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Users
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.WebResponse'
+      summary: Delete Users
+      tags:
+      - Users
+    get:
+      consumes:
+      - application/json
+      description: Find Users
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/web.WebResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/web.UserResponse'
+              type: object
+      summary: Find Users
+      tags:
+      - Users
+    put:
+      consumes:
+      - application/json
+      description: Update Users
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/web.UserUpdateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/web.WebResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/web.UserResponse'
+              type: object
+      summary: Update Users
+      tags:
+      - Users
+securityDefinitions:
+  BasicAuth:
+    type: basic
+swagger: "2.0"

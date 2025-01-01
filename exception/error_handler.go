@@ -13,22 +13,22 @@ func ErrorHandler(writer http.ResponseWriter, request *http.Request, err interfa
 
 	// panic(err)
 	// fmt.Println(err)
-	if notFoundError(writer, request, err) {
+	if notFoundError(writer, err) {
 		return
 	}
 
-	if alreadyExistError(writer, request, err) {
+	if alreadyExistError(writer, err) {
 		return
 	}
 
-	if validationError(writer, request, err) {
+	if validationError(writer, err) {
 		return
 	}
 
-	internalServerError(writer, request, err)
+	internalServerError(writer, err)
 }
 
-func validationError(writer http.ResponseWriter, request *http.Request, err interface{}) bool {
+func validationError(writer http.ResponseWriter, err interface{}) bool {
 	exception, ok := err.(validator.ValidationErrors) //cek apakah err nya bertipe ValidationErrors, ValidationErrors adalah bawaan dari package validator, jadi tidak perlu buat func baru
 	if ok {
 		writer.Header().Set("Content-Type", "application/json")
@@ -71,7 +71,7 @@ func reformatErrMsg(validationErrors validator.ValidationErrors) []string {
 	return errors
 }
 
-func alreadyExistError(writer http.ResponseWriter, request *http.Request, err interface{}) bool {
+func alreadyExistError(writer http.ResponseWriter, err interface{}) bool {
 	exception, ok := err.(AlreadyExistsError) //cek apakah err nya bertipe ValidationErrors, ValidationErrors adalah bawaan dari package validator, jadi tidak perlu buat func baru
 	if ok {
 		writer.Header().Set("Content-Type", "application/json")
@@ -90,7 +90,7 @@ func alreadyExistError(writer http.ResponseWriter, request *http.Request, err in
 	}
 }
 
-func notFoundError(writer http.ResponseWriter, request *http.Request, err interface{}) bool {
+func notFoundError(writer http.ResponseWriter, err interface{}) bool {
 	exception, ok := err.(NotFoundError) //cek apakah err nya bertipe NotFoundError
 	if ok {
 		writer.Header().Set("Content-Type", "application/json")
@@ -109,7 +109,7 @@ func notFoundError(writer http.ResponseWriter, request *http.Request, err interf
 	}
 }
 
-func internalServerError(writer http.ResponseWriter, request *http.Request, err interface{}) {
+func internalServerError(writer http.ResponseWriter, err interface{}) {
 	writer.Header().Set("Content-Type", "application/json")
 	writer.WriteHeader(http.StatusInternalServerError)
 

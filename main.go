@@ -1,20 +1,30 @@
 package main
 
 import (
-	"go-tobfa/app"
-	"go-tobfa/controller"
-	"go-tobfa/helper"
-	"go-tobfa/middleware"
-	"go-tobfa/repository"
-	"go-tobfa/service"
 	"net/http"
 
 	"github.com/go-playground/validator/v10"
 	_ "github.com/go-sql-driver/mysql"
+
+	"go-tobfa/app"
+	"go-tobfa/controller"
+	_ "go-tobfa/docs"
+	"go-tobfa/helper"
+	"go-tobfa/middleware"
+	"go-tobfa/repository"
+	"go-tobfa/service"
 )
 
-func main() {
+//	@title			Tobfa API
+//	@version		1.0
+//	@contact.name	Tobi
+//	@contact.email	tobiaditia549@gmail.com
 
+//	@host		localhost:3000
+//	@BasePath	/api
+
+// @securityDefinitions.basic	BasicAuth
+func main() {
 	db := app.NewDB()
 	validate := validator.New()
 

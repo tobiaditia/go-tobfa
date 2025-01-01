@@ -89,7 +89,7 @@ func (service *BusinessTransactionServiceImpl) Stats(ctx context.Context, reques
 
 		for _, businessTransaction := range businessTransactions {
 
-			stats = append(stats, domain.Stat{businessTransaction.Date, businessTransaction.Total})
+			stats = append(stats, domain.Stat{Date: businessTransaction.Date, Total: businessTransaction.Total})
 			totalBusinessTransaction += businessTransaction.Total
 		}
 

@@ -54,7 +54,7 @@ func (service *UserServiceImpl) Create(ctx context.Context, request web.UserCrea
 
 }
 
-func (service *UserServiceImpl) Update(ctx context.Context, request web.UserUpdateRequest) web.UserResponse {
+func (service *UserServiceImpl) Update(ctx context.Context, id int, request web.UserUpdateRequest) web.UserResponse {
 
 	err := service.Validate.Struct(request)
 	helper.PanicIfError(err)
@@ -64,7 +64,7 @@ func (service *UserServiceImpl) Update(ctx context.Context, request web.UserUpda
 
 	defer helper.CommitOrRollback(tx)
 
-	user, err := service.UserRepository.FindById(ctx, tx, request.Id)
+	user, err := service.UserRepository.FindById(ctx, tx, id)
 	if nil != err {
 		panic(exception.NewNotFoundError(err.Error()))
 	}

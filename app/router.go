@@ -3,8 +3,10 @@ package app
 import (
 	"go-tobfa/controller"
 	"go-tobfa/exception"
+	"net/http"
 
 	"github.com/julienschmidt/httprouter"
+	httpSwagger "github.com/swaggo/http-swagger"
 )
 
 func NewRouter(controllers controller.Controller) *httprouter.Router {
@@ -37,6 +39,8 @@ func NewRouter(controllers controller.Controller) *httprouter.Router {
 	router.PUT("/api/businessTransactions/:id", controllers.BusinessTransaction.Update)
 	router.DELETE("/api/businessTransactions/:id", controllers.BusinessTransaction.Delete)
 	router.GET("/api/businessTransactionsStats", controllers.BusinessTransaction.Stats)
+
+	router.Handler(http.MethodGet, "/swagger/*any", httpSwagger.WrapHandler)
 
 	router.PanicHandler = exception.ErrorHandler
 
