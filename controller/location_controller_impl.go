@@ -20,6 +20,13 @@ func NewLocationController(locationService service.LocationService) LocationCont
 	}
 }
 
+// @Tags         Location
+// @Summary      Provinces
+// @Description  Provinces
+// @Accept       json
+// @Produce      json
+// @Success      200  {object}  web.WebResponse{data=[]web.ProvinceResponse}
+// @Router       /provinces [get]
 func (controller LocationControllerImpl) Provinces(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	responses := controller.LocationService.Provinces(request.Context())
 	webResponse := web.WebResponse{
@@ -31,6 +38,14 @@ func (controller LocationControllerImpl) Provinces(writer http.ResponseWriter, r
 	helper.WriteToResponseBody(writer, webResponse)
 }
 
+// @Tags         Location
+// @Summary      Cities
+// @Description  Cities
+// @Accept       json
+// @Produce      json
+// @Param        id   path      int  true  "Province ID"
+// @Success      200  {object}  web.WebResponse{data=[]web.CityResponse}
+// @Router       /cities/{id} [get]
 func (controller LocationControllerImpl) Cities(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	provinceId := params.ByName("id")
 	id, err := strconv.Atoi(provinceId)
@@ -45,6 +60,14 @@ func (controller LocationControllerImpl) Cities(writer http.ResponseWriter, requ
 	helper.WriteToResponseBody(writer, webResponse)
 }
 
+// @Tags         Location
+// @Summary      Districts
+// @Description  Districts
+// @Accept       json
+// @Produce      json
+// @Param        id   path      int  true  "City ID"
+// @Success      200  {object}  web.WebResponse{data=[]web.DistrictResponse}
+// @Router       /districts/{id} [get]
 func (controller LocationControllerImpl) Districts(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	cityId := params.ByName("id")
 	id, err := strconv.Atoi(cityId)
@@ -59,6 +82,14 @@ func (controller LocationControllerImpl) Districts(writer http.ResponseWriter, r
 	helper.WriteToResponseBody(writer, webResponse)
 }
 
+// @Tags         Location
+// @Summary      Villages
+// @Description  Villages
+// @Accept       json
+// @Produce      json
+// @Param        id   path      int  true  "District ID"
+// @Success      200  {object}  web.WebResponse{data=[]web.VillageResponse}
+// @Router       /villages/{id} [get]
 func (controller LocationControllerImpl) Villages(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	districtId := params.ByName("id")
 	id, err := strconv.Atoi(districtId)
@@ -73,8 +104,16 @@ func (controller LocationControllerImpl) Villages(writer http.ResponseWriter, re
 	helper.WriteToResponseBody(writer, webResponse)
 }
 
+// @Tags         Location
+// @Summary      Search
+// @Description  Search
+// @Accept       json
+// @Produce      json
+// @Param        search   path      string  true  "Search"
+// @Success      200  {object}  web.WebResponse{data=[]web.VillageResponse}
+// @Router       /location/search/{search} [get]
 func (controller LocationControllerImpl) Search(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
-	search := params.ByName("searh")
+	search := params.ByName("search")
 
 	responses := controller.LocationService.Search(request.Context(), search)
 	webResponse := web.WebResponse{

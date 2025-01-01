@@ -57,7 +57,7 @@ func (service *BusinessServiceImpl) Create(ctx context.Context, request web.Busi
 
 }
 
-func (service *BusinessServiceImpl) Update(ctx context.Context, request web.BusinessUpdateRequest) web.BusinessResponse {
+func (service *BusinessServiceImpl) Update(ctx context.Context, id int, request web.BusinessUpdateRequest) web.BusinessResponse {
 
 	err := service.Validate.Struct(request)
 	helper.PanicIfError(err)
@@ -67,7 +67,7 @@ func (service *BusinessServiceImpl) Update(ctx context.Context, request web.Busi
 
 	defer helper.CommitOrRollback(tx)
 
-	business, err := service.BusinessRepository.Find(ctx, tx, request.Id)
+	business, err := service.BusinessRepository.Find(ctx, tx, id)
 	if nil != err {
 		panic(exception.NewNotFoundError(err.Error()))
 	}

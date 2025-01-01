@@ -28,7 +28,6 @@ func NewRouter(controllers controller.Controller) *httprouter.Router {
 	router.POST("/api/businesses", controllers.Business.Create)
 	router.PUT("/api/businesses/:id", controllers.Business.Update)
 	router.DELETE("/api/businesses/:id", controllers.Business.Delete)
-	router.GET("/api/businessesStats", controllers.Business.Stats)
 
 	router.GET("/api/businessCategories", controllers.BusinessCategory.FindAll)
 
@@ -38,7 +37,9 @@ func NewRouter(controllers controller.Controller) *httprouter.Router {
 	router.POST("/api/businessTransactions", controllers.BusinessTransaction.Create)
 	router.PUT("/api/businessTransactions/:id", controllers.BusinessTransaction.Update)
 	router.DELETE("/api/businessTransactions/:id", controllers.BusinessTransaction.Delete)
-	router.GET("/api/businessTransactionsStats", controllers.BusinessTransaction.Stats)
+	router.GET("/api/stats/businessTransactions", controllers.BusinessTransaction.Stats)
+
+	router.GET("/api/stats/business", controllers.Business.Stats)
 
 	router.Handler(http.MethodGet, "/swagger/*any", httpSwagger.WrapHandler)
 

@@ -1,7 +1,6 @@
 package web
 
 type BusinessUpdateRequest struct {
-	Id                 int
 	UserId             int    `validate:"required" json:"userId"`
 	Name               string `validate:"required,max=100,min=3" json:"name"`
 	Address            string `validate:"required" json:"address"`

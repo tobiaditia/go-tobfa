@@ -20,9 +20,9 @@ func NewUserController(userService service.UserService) UserController {
 	}
 }
 
-// @Tags         Users
-// @Summary      Create Users
-// @Description  Create Users
+// @Tags         User
+// @Summary      Create User
+// @Description  Create User
 // @Accept       json
 // @Produce      json
 // @Param        body	body		web.UserCreateRequest	true	"Body"
@@ -46,9 +46,9 @@ func (controller UserControllerImpl) Create(writer http.ResponseWriter, request 
 
 }
 
-// @Tags         Users
-// @Summary      Update Users
-// @Description  Update Users
+// @Tags         User
+// @Summary      Update User
+// @Description  Update User
 // @Accept       json
 // @Produce      json
 // @Param        id   path      int  true  "ID"
@@ -73,9 +73,9 @@ func (controller UserControllerImpl) Update(writer http.ResponseWriter, request 
 	helper.WriteToResponseBody(writer, webResponse)
 }
 
-// @Tags         Users
-// @Summary      Delete Users
-// @Description  Delete Users
+// @Tags         User
+// @Summary      Delete User
+// @Description  Delete User
 // @Accept       json
 // @Produce      json
 // @Param        id   path      int  true  "ID"
@@ -95,9 +95,9 @@ func (controller UserControllerImpl) Delete(writer http.ResponseWriter, request 
 	helper.WriteToResponseBody(writer, webResponse)
 }
 
-// @Tags         Users
-// @Summary      Find Users
-// @Description  Find Users
+// @Tags         User
+// @Summary      Find User
+// @Description  Find User
 // @Accept       json
 // @Produce      json
 // @Param        id   path      int  true  "ID"

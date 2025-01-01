@@ -11,9 +11,9 @@
     "host": "localhost:3000",
     "basePath": "/api",
     "paths": {
-        "/users": {
-            "post": {
-                "description": "Create Users",
+        "/businessCategories": {
+            "get": {
+                "description": "Get Business Category",
                 "consumes": [
                     "application/json"
                 ],
@@ -21,9 +21,823 @@
                     "application/json"
                 ],
                 "tags": [
-                    "Users"
+                    "Business Category"
                 ],
-                "summary": "Create Users",
+                "summary": "Get Business Category",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/web.WebResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/web.BusinessCategoryResponse"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/businessTransactions": {
+            "post": {
+                "description": "Create Business Transaction",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Business Transaction"
+                ],
+                "summary": "Create Business Transaction",
+                "parameters": [
+                    {
+                        "description": "Body",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/web.BusinessTransactionCreateRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/web.WebResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/web.BusinessTransactionResponse"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/businessTransactions/{id}": {
+            "get": {
+                "description": "Find Business Transaction",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Business Transaction"
+                ],
+                "summary": "Find Business Transaction",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/web.WebResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/web.BusinessTransactionResponse"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Update Business Transaction",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Business Transaction"
+                ],
+                "summary": "Update Business Transaction",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Body",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/web.BusinessTransactionUpdateRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/web.WebResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/web.BusinessTransactionResponse"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete Business Transaction",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Business Transaction"
+                ],
+                "summary": "Delete Business Transaction",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/web.WebResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/businessTransactions/{id}/business": {
+            "get": {
+                "description": "Find Business Transaction",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Business Transaction"
+                ],
+                "summary": "Find Business Transaction",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Business ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/web.WebResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/web.BusinessTransactionResponse"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/businesses": {
+            "get": {
+                "description": "Get Business",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Business"
+                ],
+                "summary": "Get Business",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/web.WebResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/web.BusinessResponse"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create Business",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Business"
+                ],
+                "summary": "Create Business",
+                "parameters": [
+                    {
+                        "description": "Body",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/web.BusinessCreateRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/web.WebResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/web.BusinessResponse"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/businesses/{id}": {
+            "get": {
+                "description": "Find Business",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Business"
+                ],
+                "summary": "Find Business",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/web.WebResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/web.BusinessResponse"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Update Business",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Business"
+                ],
+                "summary": "Update Business",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Body",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/web.BusinessUpdateRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/web.WebResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/web.BusinessResponse"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete Business",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Business"
+                ],
+                "summary": "Delete Business",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/web.WebResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/cities/{id}": {
+            "get": {
+                "description": "Cities",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Location"
+                ],
+                "summary": "Cities",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Province ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/web.WebResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/web.CityResponse"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/districts/{id}": {
+            "get": {
+                "description": "Districts",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Location"
+                ],
+                "summary": "Districts",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "City ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/web.WebResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/web.DistrictResponse"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/location/search/{search}": {
+            "get": {
+                "description": "Search",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Location"
+                ],
+                "summary": "Search",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Search",
+                        "name": "search",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/web.WebResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/web.VillageResponse"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/provinces": {
+            "get": {
+                "description": "Provinces",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Location"
+                ],
+                "summary": "Provinces",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/web.WebResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/web.ProvinceResponse"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/stats/business": {
+            "get": {
+                "description": "Stats Business",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Stat"
+                ],
+                "summary": "Stats Business",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "dateStarted",
+                        "name": "dateStarted",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "dateEnded",
+                        "name": "dateEnded",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "businessIds, sparated by coma",
+                        "name": "businessIds",
+                        "in": "path"
+                    },
+                    {
+                        "type": "string",
+                        "description": "businessTransactionTypeIds, sparated by coma",
+                        "name": "businessTransactionTypeIds",
+                        "in": "path"
+                    },
+                    {
+                        "type": "string",
+                        "description": "businessTransactionItemIds, sparated by coma",
+                        "name": "businessTransactionItemIds",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/web.WebResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/web.BusinessStatsResponse"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/stats/businessTransactions": {
+            "get": {
+                "description": "Stats Business Transaction",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Stat"
+                ],
+                "summary": "Stats Business Transaction",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "dateStarted",
+                        "name": "dateStarted",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "dateEnded",
+                        "name": "dateEnded",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "businessTransactionTypeId",
+                        "name": "businessTransactionTypeId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "businessTransactionItemId",
+                        "name": "businessTransactionItemId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "provinceId",
+                        "name": "provinceId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "cityId",
+                        "name": "cityId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "districtId",
+                        "name": "districtId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "villageId",
+                        "name": "villageId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "businessCategoryId",
+                        "name": "businessCategoryId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/web.WebResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/web.BusinessTransactionStatsResponse"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/users": {
+            "post": {
+                "description": "Create User",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "Create User",
                 "parameters": [
                     {
                         "description": "Body",
@@ -140,7 +954,7 @@
         },
         "/users/{id}": {
             "get": {
-                "description": "Find Users",
+                "description": "Find User",
                 "consumes": [
                     "application/json"
                 ],
@@ -148,9 +962,9 @@
                     "application/json"
                 ],
                 "tags": [
-                    "Users"
+                    "User"
                 ],
-                "summary": "Find Users",
+                "summary": "Find User",
                 "parameters": [
                     {
                         "type": "integer",
@@ -182,7 +996,7 @@
                 }
             },
             "put": {
-                "description": "Update Users",
+                "description": "Update User",
                 "consumes": [
                     "application/json"
                 ],
@@ -190,9 +1004,9 @@
                     "application/json"
                 ],
                 "tags": [
-                    "Users"
+                    "User"
                 ],
-                "summary": "Update Users",
+                "summary": "Update User",
                 "parameters": [
                     {
                         "type": "integer",
@@ -233,7 +1047,7 @@
                 }
             },
             "delete": {
-                "description": "Delete Users",
+                "description": "Delete User",
                 "consumes": [
                     "application/json"
                 ],
@@ -241,9 +1055,9 @@
                     "application/json"
                 ],
                 "tags": [
-                    "Users"
+                    "User"
                 ],
-                "summary": "Delete Users",
+                "summary": "Delete User",
                 "parameters": [
                     {
                         "type": "integer",
@@ -262,9 +1076,514 @@
                     }
                 }
             }
+        },
+        "/villages/{id}": {
+            "get": {
+                "description": "Villages",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Location"
+                ],
+                "summary": "Villages",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "District ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/web.WebResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/web.VillageResponse"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
+        "web.Business": {
+            "type": "object",
+            "properties": {
+                "businessTransactionItem": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/web.TransactionItemStat"
+                    }
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "total": {
+                    "type": "integer"
+                },
+                "totalBuy": {
+                    "type": "integer"
+                },
+                "totalSell": {
+                    "type": "integer"
+                }
+            }
+        },
+        "web.BusinessCategoryResponse": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "web.BusinessCreateRequest": {
+            "type": "object",
+            "required": [
+                "address",
+                "businessCategoryId",
+                "cityId",
+                "countryId",
+                "districtId",
+                "name",
+                "provinceId",
+                "userId",
+                "villageId"
+            ],
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "businessCategoryId": {
+                    "type": "integer"
+                },
+                "cityId": {
+                    "type": "integer"
+                },
+                "countryId": {
+                    "type": "integer"
+                },
+                "districtId": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 3
+                },
+                "provinceId": {
+                    "type": "integer"
+                },
+                "userId": {
+                    "type": "integer"
+                },
+                "villageId": {
+                    "type": "integer"
+                }
+            }
+        },
+        "web.BusinessResponse": {
+            "type": "object",
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "businessCategoryId": {
+                    "type": "integer"
+                },
+                "cityId": {
+                    "type": "integer"
+                },
+                "countryId": {
+                    "type": "integer"
+                },
+                "districtId": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "provinceId": {
+                    "type": "integer"
+                },
+                "userId": {
+                    "type": "integer"
+                },
+                "villageId": {
+                    "type": "integer"
+                }
+            }
+        },
+        "web.BusinessStatsResponse": {
+            "type": "object",
+            "properties": {
+                "businessTransactionItemIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "businessTransactionType": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/web.TransactionTypeStat"
+                    }
+                },
+                "businessTransactionTypeIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "businesses": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/web.Business"
+                    }
+                },
+                "dateEnded": {
+                    "type": "string"
+                },
+                "dateStarted": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "total": {
+                    "type": "integer"
+                },
+                "totalBuy": {
+                    "type": "integer"
+                },
+                "totalSell": {
+                    "type": "integer"
+                }
+            }
+        },
+        "web.BusinessTransactionCreateRequest": {
+            "type": "object",
+            "required": [
+                "businessId",
+                "businessTransactionItemId",
+                "businessTransactionTypeId",
+                "date",
+                "description",
+                "multiplier",
+                "total"
+            ],
+            "properties": {
+                "businessId": {
+                    "type": "integer"
+                },
+                "businessTransactionItemId": {
+                    "type": "integer"
+                },
+                "businessTransactionTypeId": {
+                    "type": "integer"
+                },
+                "date": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "multiplier": {
+                    "type": "integer"
+                },
+                "total": {
+                    "type": "integer"
+                }
+            }
+        },
+        "web.BusinessTransactionItemResponse": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "web.BusinessTransactionResponse": {
+            "type": "object",
+            "properties": {
+                "businessId": {
+                    "type": "integer"
+                },
+                "businessTransactionItem": {
+                    "$ref": "#/definitions/web.BusinessTransactionItemResponse"
+                },
+                "businessTransactionItemId": {
+                    "type": "integer"
+                },
+                "businessTransactionTypeId": {
+                    "type": "integer"
+                },
+                "date": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "multiplier": {
+                    "type": "integer"
+                },
+                "total": {
+                    "type": "integer"
+                }
+            }
+        },
+        "web.BusinessTransactionStatsResponse": {
+            "type": "object",
+            "properties": {
+                "averange": {
+                    "type": "integer"
+                },
+                "businessCategory": {
+                    "$ref": "#/definitions/web.BusinessCategoryResponse"
+                },
+                "stats": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/web.StatsResponse"
+                    }
+                }
+            }
+        },
+        "web.BusinessTransactionUpdateRequest": {
+            "type": "object",
+            "required": [
+                "businessId",
+                "businessTransactionItemId",
+                "businessTransactionTypeId",
+                "date",
+                "description",
+                "multiplier",
+                "total"
+            ],
+            "properties": {
+                "businessId": {
+                    "type": "integer"
+                },
+                "businessTransactionItemId": {
+                    "type": "integer"
+                },
+                "businessTransactionTypeId": {
+                    "type": "integer"
+                },
+                "date": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "multiplier": {
+                    "type": "integer"
+                },
+                "total": {
+                    "type": "integer"
+                }
+            }
+        },
+        "web.BusinessUpdateRequest": {
+            "type": "object",
+            "required": [
+                "address",
+                "businessCategoryId",
+                "cityId",
+                "countryId",
+                "districtId",
+                "name",
+                "provinceId",
+                "userId",
+                "villageId"
+            ],
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "businessCategoryId": {
+                    "type": "integer"
+                },
+                "cityId": {
+                    "type": "integer"
+                },
+                "countryId": {
+                    "type": "integer"
+                },
+                "districtId": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 3
+                },
+                "provinceId": {
+                    "type": "integer"
+                },
+                "userId": {
+                    "type": "integer"
+                },
+                "villageId": {
+                    "type": "integer"
+                }
+            }
+        },
+        "web.CityResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "fullCode": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "provinceId": {
+                    "type": "integer"
+                },
+                "type": {
+                    "type": "integer"
+                }
+            }
+        },
+        "web.DistrictResponse": {
+            "type": "object",
+            "properties": {
+                "cityId": {
+                    "type": "integer"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "fullCode": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "web.ProvinceResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "web.StatsResponse": {
+            "type": "object",
+            "properties": {
+                "date": {
+                    "type": "string"
+                },
+                "total": {
+                    "type": "integer"
+                }
+            }
+        },
+        "web.TransactionItemStat": {
+            "type": "object",
+            "properties": {
+                "businessTransactionType": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/web.TransactionTypeStat"
+                    }
+                },
+                "name": {
+                    "type": "string"
+                },
+                "total": {
+                    "type": "integer"
+                },
+                "totalBuy": {
+                    "type": "integer"
+                },
+                "totalSell": {
+                    "type": "integer"
+                }
+            }
+        },
+        "web.TransactionStat": {
+            "type": "object",
+            "properties": {
+                "date": {
+                    "type": "string"
+                },
+                "total": {
+                    "type": "integer"
+                }
+            }
+        },
+        "web.TransactionTypeStat": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "stats": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/web.TransactionStat"
+                    }
+                }
+            }
+        },
         "web.UserCreateRequest": {
             "type": "object",
             "required": [
@@ -329,6 +1648,32 @@
                     "type": "string",
                     "maxLength": 100,
                     "minLength": 3
+                }
+            }
+        },
+        "web.VillageResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "districtId": {
+                    "type": "integer"
+                },
+                "fullCode": {
+                    "type": "string"
+                },
+                "fullName": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "posCode": {
+                    "type": "string"
                 }
             }
         },

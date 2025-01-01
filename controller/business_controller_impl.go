@@ -20,6 +20,14 @@ func NewBusinessController(businessService service.BusinessService) BusinessCont
 	}
 }
 
+// @Tags         Business
+// @Summary      Create Business
+// @Description  Create Business
+// @Accept       json
+// @Produce      json
+// @Param        body	body		web.BusinessCreateRequest	true	"Body"
+// @Success      200  {object}  web.WebResponse{data=web.BusinessResponse}
+// @Router       /businesses [post]
 func (controller BusinessControllerImpl) Create(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	businessCreateRequest := web.BusinessCreateRequest{}
 	helper.ReadFromRequestBody(request, &businessCreateRequest)
@@ -35,6 +43,15 @@ func (controller BusinessControllerImpl) Create(writer http.ResponseWriter, requ
 
 }
 
+// @Tags         Business
+// @Summary      Update Business
+// @Description  Update Business
+// @Accept       json
+// @Produce      json
+// @Param        id   path      int  true  "ID"
+// @Param        body	body		web.BusinessUpdateRequest	true	"Body"
+// @Success      200  {object}  web.WebResponse{data=web.BusinessResponse}
+// @Router       /businesses/{id} [put]
 func (controller BusinessControllerImpl) Update(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	businessUpdateRequest := web.BusinessUpdateRequest{}
 	helper.ReadFromRequestBody(request, &businessUpdateRequest)
@@ -42,9 +59,8 @@ func (controller BusinessControllerImpl) Update(writer http.ResponseWriter, requ
 	businessId := params.ByName("id")
 	id, err := strconv.Atoi(businessId)
 	helper.PanicIfError(err)
-	businessUpdateRequest.Id = id
 
-	businessResponse := controller.BusinessService.Update(request.Context(), businessUpdateRequest)
+	businessResponse := controller.BusinessService.Update(request.Context(), id, businessUpdateRequest)
 	webResponse := web.WebResponse{
 		Code:   200,
 		Status: "OK",
@@ -54,6 +70,14 @@ func (controller BusinessControllerImpl) Update(writer http.ResponseWriter, requ
 	helper.WriteToResponseBody(writer, webResponse)
 }
 
+// @Tags         Business
+// @Summary      Delete Business
+// @Description  Delete Business
+// @Accept       json
+// @Produce      json
+// @Param        id   path      int  true  "ID"
+// @Success      200  {object}  web.WebResponse
+// @Router       /businesses/{id} [delete]
 func (controller BusinessControllerImpl) Delete(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	businessId := params.ByName("id")
 	id, err := strconv.Atoi(businessId)
@@ -68,6 +92,14 @@ func (controller BusinessControllerImpl) Delete(writer http.ResponseWriter, requ
 	helper.WriteToResponseBody(writer, webResponse)
 }
 
+// @Tags         Business
+// @Summary      Find Business
+// @Description  Find Business
+// @Accept       json
+// @Produce      json
+// @Param        id   path      int  true  "ID"
+// @Success      200  {object}  web.WebResponse{data=web.BusinessResponse}
+// @Router       /businesses/{id} [get]
 func (controller BusinessControllerImpl) FindById(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	businessId := params.ByName("id")
 	id, err := strconv.Atoi(businessId)
@@ -83,6 +115,13 @@ func (controller BusinessControllerImpl) FindById(writer http.ResponseWriter, re
 	helper.WriteToResponseBody(writer, webResponse)
 }
 
+// @Tags         Business
+// @Summary      Get Business
+// @Description  Get Business
+// @Accept       json
+// @Produce      json
+// @Success      200  {object}  web.WebResponse{data=[]web.BusinessResponse}
+// @Router       /businesses [get]
 func (controller BusinessControllerImpl) FindAll(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	businessResponses := controller.BusinessService.FindAll(request.Context())
 	webResponse := web.WebResponse{
@@ -94,6 +133,18 @@ func (controller BusinessControllerImpl) FindAll(writer http.ResponseWriter, req
 	helper.WriteToResponseBody(writer, webResponse)
 }
 
+// @Tags         Stat
+// @Summary      Stats Business
+// @Description  Stats Business
+// @Accept       json
+// @Produce      json
+// @Param        dateStarted   path      string  true  "dateStarted"
+// @Param        dateEnded   path      string  true  "dateEnded"
+// @Param        businessIds   path      string  false  "businessIds, sparated by coma"
+// @Param        businessTransactionTypeIds   path      string  false  "businessTransactionTypeIds, sparated by coma"
+// @Param        businessTransactionItemIds   path      string  false  "businessTransactionItemIds, sparated by coma"
+// @Success      200  {object}  web.WebResponse{data=web.BusinessStatsResponse}
+// @Router       /stats/business [get]
 func (controller BusinessControllerImpl) Stats(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	businessStatsGetRequest := web.BusinessStatsGetRequest{}
 	helper.ReadFromURLQuery(request, &businessStatsGetRequest)

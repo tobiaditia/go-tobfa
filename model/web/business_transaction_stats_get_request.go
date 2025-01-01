@@ -9,5 +9,5 @@ type BusinessTransactionStatsGetRequest struct {
 	CityId                    int    `validate:"required" json:"cityId"`
 	DistrictId                int    `validate:"required" json:"districtId"`
 	VillageId                 int    `validate:"required" json:"villageId"`
-	BusinessCategoryId        int    ` json:"BusinessCategoryId"`
+	BusinessCategoryId        int    `json:"businessCategoryId"`
 }

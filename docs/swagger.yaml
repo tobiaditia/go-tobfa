@@ -1,5 +1,315 @@
 basePath: /api
 definitions:
+  web.Business:
+    properties:
+      businessTransactionItem:
+        items:
+          $ref: '#/definitions/web.TransactionItemStat'
+        type: array
+      id:
+        type: integer
+      name:
+        type: string
+      total:
+        type: integer
+      totalBuy:
+        type: integer
+      totalSell:
+        type: integer
+    type: object
+  web.BusinessCategoryResponse:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+  web.BusinessCreateRequest:
+    properties:
+      address:
+        type: string
+      businessCategoryId:
+        type: integer
+      cityId:
+        type: integer
+      countryId:
+        type: integer
+      districtId:
+        type: integer
+      name:
+        maxLength: 100
+        minLength: 3
+        type: string
+      provinceId:
+        type: integer
+      userId:
+        type: integer
+      villageId:
+        type: integer
+    required:
+    - address
+    - businessCategoryId
+    - cityId
+    - countryId
+    - districtId
+    - name
+    - provinceId
+    - userId
+    - villageId
+    type: object
+  web.BusinessResponse:
+    properties:
+      address:
+        type: string
+      businessCategoryId:
+        type: integer
+      cityId:
+        type: integer
+      countryId:
+        type: integer
+      districtId:
+        type: integer
+      id:
+        type: integer
+      name:
+        type: string
+      provinceId:
+        type: integer
+      userId:
+        type: integer
+      villageId:
+        type: integer
+    type: object
+  web.BusinessStatsResponse:
+    properties:
+      businessTransactionItemIds:
+        items:
+          type: integer
+        type: array
+      businessTransactionType:
+        items:
+          $ref: '#/definitions/web.TransactionTypeStat'
+        type: array
+      businessTransactionTypeIds:
+        items:
+          type: integer
+        type: array
+      businesses:
+        items:
+          $ref: '#/definitions/web.Business'
+        type: array
+      dateEnded:
+        type: string
+      dateStarted:
+        type: string
+      name:
+        type: string
+      total:
+        type: integer
+      totalBuy:
+        type: integer
+      totalSell:
+        type: integer
+    type: object
+  web.BusinessTransactionCreateRequest:
+    properties:
+      businessId:
+        type: integer
+      businessTransactionItemId:
+        type: integer
+      businessTransactionTypeId:
+        type: integer
+      date:
+        type: string
+      description:
+        type: string
+      multiplier:
+        type: integer
+      total:
+        type: integer
+    required:
+    - businessId
+    - businessTransactionItemId
+    - businessTransactionTypeId
+    - date
+    - description
+    - multiplier
+    - total
+    type: object
+  web.BusinessTransactionItemResponse:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+  web.BusinessTransactionResponse:
+    properties:
+      businessId:
+        type: integer
+      businessTransactionItem:
+        $ref: '#/definitions/web.BusinessTransactionItemResponse'
+      businessTransactionItemId:
+        type: integer
+      businessTransactionTypeId:
+        type: integer
+      date:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      multiplier:
+        type: integer
+      total:
+        type: integer
+    type: object
+  web.BusinessTransactionStatsResponse:
+    properties:
+      averange:
+        type: integer
+      businessCategory:
+        $ref: '#/definitions/web.BusinessCategoryResponse'
+      stats:
+        items:
+          $ref: '#/definitions/web.StatsResponse'
+        type: array
+    type: object
+  web.BusinessTransactionUpdateRequest:
+    properties:
+      businessId:
+        type: integer
+      businessTransactionItemId:
+        type: integer
+      businessTransactionTypeId:
+        type: integer
+      date:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      multiplier:
+        type: integer
+      total:
+        type: integer
+    required:
+    - businessId
+    - businessTransactionItemId
+    - businessTransactionTypeId
+    - date
+    - description
+    - multiplier
+    - total
+    type: object
+  web.BusinessUpdateRequest:
+    properties:
+      address:
+        type: string
+      businessCategoryId:
+        type: integer
+      cityId:
+        type: integer
+      countryId:
+        type: integer
+      districtId:
+        type: integer
+      name:
+        maxLength: 100
+        minLength: 3
+        type: string
+      provinceId:
+        type: integer
+      userId:
+        type: integer
+      villageId:
+        type: integer
+    required:
+    - address
+    - businessCategoryId
+    - cityId
+    - countryId
+    - districtId
+    - name
+    - provinceId
+    - userId
+    - villageId
+    type: object
+  web.CityResponse:
+    properties:
+      code:
+        type: string
+      fullCode:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      provinceId:
+        type: integer
+      type:
+        type: integer
+    type: object
+  web.DistrictResponse:
+    properties:
+      cityId:
+        type: integer
+      code:
+        type: string
+      fullCode:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+  web.ProvinceResponse:
+    properties:
+      code:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+  web.StatsResponse:
+    properties:
+      date:
+        type: string
+      total:
+        type: integer
+    type: object
+  web.TransactionItemStat:
+    properties:
+      businessTransactionType:
+        items:
+          $ref: '#/definitions/web.TransactionTypeStat'
+        type: array
+      name:
+        type: string
+      total:
+        type: integer
+      totalBuy:
+        type: integer
+      totalSell:
+        type: integer
+    type: object
+  web.TransactionStat:
+    properties:
+      date:
+        type: string
+      total:
+        type: integer
+    type: object
+  web.TransactionTypeStat:
+    properties:
+      name:
+        type: string
+      stats:
+        items:
+          $ref: '#/definitions/web.TransactionStat'
+        type: array
+    type: object
   web.UserCreateRequest:
     properties:
       email:
@@ -49,6 +359,23 @@ definitions:
     - handphone
     - name
     type: object
+  web.VillageResponse:
+    properties:
+      code:
+        type: string
+      districtId:
+        type: integer
+      fullCode:
+        type: string
+      fullName:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      posCode:
+        type: string
+    type: object
   web.WebResponse:
     properties:
       code:
@@ -65,11 +392,507 @@ info:
   title: Tobfa API
   version: "1.0"
 paths:
+  /businessCategories:
+    get:
+      consumes:
+      - application/json
+      description: Get Business Category
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/web.WebResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/web.BusinessCategoryResponse'
+                  type: array
+              type: object
+      summary: Get Business Category
+      tags:
+      - Business Category
+  /businessTransactions:
+    post:
+      consumes:
+      - application/json
+      description: Create Business Transaction
+      parameters:
+      - description: Body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/web.BusinessTransactionCreateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/web.WebResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/web.BusinessTransactionResponse'
+              type: object
+      summary: Create Business Transaction
+      tags:
+      - Business Transaction
+  /businessTransactions/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Business Transaction
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.WebResponse'
+      summary: Delete Business Transaction
+      tags:
+      - Business Transaction
+    get:
+      consumes:
+      - application/json
+      description: Find Business Transaction
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/web.WebResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/web.BusinessTransactionResponse'
+              type: object
+      summary: Find Business Transaction
+      tags:
+      - Business Transaction
+    put:
+      consumes:
+      - application/json
+      description: Update Business Transaction
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/web.BusinessTransactionUpdateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/web.WebResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/web.BusinessTransactionResponse'
+              type: object
+      summary: Update Business Transaction
+      tags:
+      - Business Transaction
+  /businessTransactions/{id}/business:
+    get:
+      consumes:
+      - application/json
+      description: Find Business Transaction
+      parameters:
+      - description: Business ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/web.WebResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/web.BusinessTransactionResponse'
+                  type: array
+              type: object
+      summary: Find Business Transaction
+      tags:
+      - Business Transaction
+  /businesses:
+    get:
+      consumes:
+      - application/json
+      description: Get Business
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/web.WebResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/web.BusinessResponse'
+                  type: array
+              type: object
+      summary: Get Business
+      tags:
+      - Business
+    post:
+      consumes:
+      - application/json
+      description: Create Business
+      parameters:
+      - description: Body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/web.BusinessCreateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/web.WebResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/web.BusinessResponse'
+              type: object
+      summary: Create Business
+      tags:
+      - Business
+  /businesses/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Business
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.WebResponse'
+      summary: Delete Business
+      tags:
+      - Business
+    get:
+      consumes:
+      - application/json
+      description: Find Business
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/web.WebResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/web.BusinessResponse'
+              type: object
+      summary: Find Business
+      tags:
+      - Business
+    put:
+      consumes:
+      - application/json
+      description: Update Business
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/web.BusinessUpdateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/web.WebResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/web.BusinessResponse'
+              type: object
+      summary: Update Business
+      tags:
+      - Business
+  /cities/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Cities
+      parameters:
+      - description: Province ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/web.WebResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/web.CityResponse'
+                  type: array
+              type: object
+      summary: Cities
+      tags:
+      - Location
+  /districts/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Districts
+      parameters:
+      - description: City ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/web.WebResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/web.DistrictResponse'
+                  type: array
+              type: object
+      summary: Districts
+      tags:
+      - Location
+  /location/search/{search}:
+    get:
+      consumes:
+      - application/json
+      description: Search
+      parameters:
+      - description: Search
+        in: path
+        name: search
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/web.WebResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/web.VillageResponse'
+                  type: array
+              type: object
+      summary: Search
+      tags:
+      - Location
+  /provinces:
+    get:
+      consumes:
+      - application/json
+      description: Provinces
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/web.WebResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/web.ProvinceResponse'
+                  type: array
+              type: object
+      summary: Provinces
+      tags:
+      - Location
+  /stats/business:
+    get:
+      consumes:
+      - application/json
+      description: Stats Business
+      parameters:
+      - description: dateStarted
+        in: path
+        name: dateStarted
+        required: true
+        type: string
+      - description: dateEnded
+        in: path
+        name: dateEnded
+        required: true
+        type: string
+      - description: businessIds, sparated by coma
+        in: path
+        name: businessIds
+        type: string
+      - description: businessTransactionTypeIds, sparated by coma
+        in: path
+        name: businessTransactionTypeIds
+        type: string
+      - description: businessTransactionItemIds, sparated by coma
+        in: path
+        name: businessTransactionItemIds
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/web.WebResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/web.BusinessStatsResponse'
+              type: object
+      summary: Stats Business
+      tags:
+      - Stat
+  /stats/businessTransactions:
+    get:
+      consumes:
+      - application/json
+      description: Stats Business Transaction
+      parameters:
+      - description: dateStarted
+        in: path
+        name: dateStarted
+        required: true
+        type: string
+      - description: dateEnded
+        in: path
+        name: dateEnded
+        required: true
+        type: string
+      - description: businessTransactionTypeId
+        in: path
+        name: businessTransactionTypeId
+        required: true
+        type: integer
+      - description: businessTransactionItemId
+        in: path
+        name: businessTransactionItemId
+        required: true
+        type: integer
+      - description: provinceId
+        in: path
+        name: provinceId
+        required: true
+        type: integer
+      - description: cityId
+        in: path
+        name: cityId
+        required: true
+        type: integer
+      - description: districtId
+        in: path
+        name: districtId
+        required: true
+        type: integer
+      - description: villageId
+        in: path
+        name: villageId
+        required: true
+        type: integer
+      - description: businessCategoryId
+        in: path
+        name: businessCategoryId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/web.WebResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/web.BusinessTransactionStatsResponse'
+                  type: array
+              type: object
+      summary: Stats Business Transaction
+      tags:
+      - Stat
   /users:
     post:
       consumes:
       - application/json
-      description: Create Users
+      description: Create User
       parameters:
       - description: Body
         in: body
@@ -134,14 +957,14 @@ paths:
                 status:
                   type: string
               type: object
-      summary: Create Users
+      summary: Create User
       tags:
-      - Users
+      - User
   /users/{id}:
     delete:
       consumes:
       - application/json
-      description: Delete Users
+      description: Delete User
       parameters:
       - description: ID
         in: path
@@ -155,13 +978,13 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/web.WebResponse'
-      summary: Delete Users
+      summary: Delete User
       tags:
-      - Users
+      - User
     get:
       consumes:
       - application/json
-      description: Find Users
+      description: Find User
       parameters:
       - description: ID
         in: path
@@ -180,13 +1003,13 @@ paths:
                 data:
                   $ref: '#/definitions/web.UserResponse'
               type: object
-      summary: Find Users
+      summary: Find User
       tags:
-      - Users
+      - User
     put:
       consumes:
       - application/json
-      description: Update Users
+      description: Update User
       parameters:
       - description: ID
         in: path
@@ -211,9 +1034,37 @@ paths:
                 data:
                   $ref: '#/definitions/web.UserResponse'
               type: object
-      summary: Update Users
+      summary: Update User
       tags:
-      - Users
+      - User
+  /villages/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Villages
+      parameters:
+      - description: District ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/web.WebResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/web.VillageResponse'
+                  type: array
+              type: object
+      summary: Villages
+      tags:
+      - Location
 securityDefinitions:
   BasicAuth:
     type: basic
