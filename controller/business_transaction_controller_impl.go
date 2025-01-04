@@ -82,15 +82,15 @@ func (controller BusinessTransactionControllerImpl) FindByBusiness(writer http.R
 // @Description  Stats Business Transaction
 // @Accept       json
 // @Produce      json
-// @Param        dateStarted   path      string  true  "dateStarted"
-// @Param        dateEnded   path      string  true  "dateEnded"
-// @Param        businessTransactionTypeId   path      int  true  "businessTransactionTypeId"
-// @Param        businessTransactionItemId   path      int  true  "businessTransactionItemId"
-// @Param        provinceId   path      int  true  "provinceId"
-// @Param        cityId   path      int  true  "cityId"
-// @Param        districtId   path      int  true  "districtId"
-// @Param        villageId   path      int  true  "villageId"
-// @Param        businessCategoryId   path      int  true  "businessCategoryId"
+// @Param        dateStarted   query      string  true  "dateStarted"
+// @Param        dateEnded   query      string  true  "dateEnded"
+// @Param        businessTransactionTypeId   query      int  true  "businessTransactionTypeId"
+// @Param        businessTransactionItemId   query      int  true  "businessTransactionItemId"
+// @Param        provinceId   query      int  true  "provinceId"
+// @Param        cityId   query      int  true  "cityId"
+// @Param        districtId   query      int  true  "districtId"
+// @Param        villageId   query      int  true  "villageId"
+// @Param        businessCategoryId   query      int  true  "businessCategoryId"
 // @Success      200  {object}  web.WebResponse{data=[]web.BusinessTransactionStatsResponse}
 // @Router       /stats/businessTransactions [get]
 func (controller BusinessTransactionControllerImpl) Stats(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {

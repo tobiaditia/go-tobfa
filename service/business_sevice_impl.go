@@ -39,10 +39,15 @@ func (service *BusinessServiceImpl) Create(ctx context.Context, request web.Busi
 
 	defer helper.CommitOrRollback(tx)
 
+	address := sql.NullString{Valid: false}
+	if request.Address != nil {
+		address = sql.NullString{String: *request.Address, Valid: true}
+	}
+
 	business := domain.Business{
 		UserId:             request.UserId,
 		Name:               request.Name,
-		Address:            request.Address,
+		Address:            address,
 		BusinessCategoryId: request.BusinessCategoryId,
 		CountryId:          request.CountryId,
 		ProvinceId:         request.ProvinceId,
@@ -72,9 +77,12 @@ func (service *BusinessServiceImpl) Update(ctx context.Context, id int, request 
 		panic(exception.NewNotFoundError(err.Error()))
 	}
 
+	business.Address = sql.NullString{Valid: false}
+	if request.Address != nil {
+		business.Address = sql.NullString{String: *request.Address, Valid: true}
+	}
 	business.UserId = request.UserId
 	business.Name = request.Name
-	business.Address = request.Address
 	business.BusinessCategoryId = request.BusinessCategoryId
 	business.CountryId = request.CountryId
 	business.ProvinceId = request.ProvinceId

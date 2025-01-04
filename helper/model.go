@@ -6,17 +6,24 @@ import (
 )
 
 func ToBusinessResponse(business domain.Business) web.BusinessResponse {
+	address := func() *string {
+		if business.Address.Valid {
+			return &business.Address.String
+		}
+		return nil
+	}()
 	return web.BusinessResponse{
 		Id:                 business.Id,
 		UserId:             business.UserId,
 		Name:               business.Name,
-		Address:            business.Address,
+		Address:            address,
 		BusinessCategoryId: business.BusinessCategoryId,
 		CountryId:          business.CountryId,
 		ProvinceId:         business.ProvinceId,
 		CityId:             business.CityId,
 		DistrictId:         business.DistrictId,
 		VillageId:          business.VillageId,
+		CreatedAt:          business.CreatedAt,
 	}
 }
 

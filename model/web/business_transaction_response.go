@@ -1,5 +1,7 @@
 package web
 
+import "time"
+
 type BusinessTransactionResponse struct {
 	Id                        int                             `json:"id"`
 	BusinessId                int                             `json:"businessId"`
@@ -7,7 +9,7 @@ type BusinessTransactionResponse struct {
 	BusinessTransactionItemId int                             `json:"businessTransactionItemId"`
 	Total                     int                             `json:"total"`
 	Multiplier                int                             `json:"multiplier"`
-	Date                      string                          `json:"date"`
+	Date                      time.Time                       `json:"date"`
 	Description               string                          `json:"description"`
 	BusinessTransactionItem   BusinessTransactionItemResponse `json:"businessTransactionItem"`
 }

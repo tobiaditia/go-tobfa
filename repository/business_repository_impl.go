@@ -17,7 +17,7 @@ func NewBusinessRepository() BusinessRepository {
 
 func (repository *BusinessRepositoryImpl) FindAll(ctx context.Context, tx *sql.Tx) []domain.Business {
 	userId := 1
-	sql := "select * from businesses where user_id = ?"
+	sql := "select id, user_id, name, address, business_category_id, country_id, province_id, city_id, district_id, village_id, created_at, updated_at from businesses where user_id = ?"
 	rows, err := tx.QueryContext(ctx, sql, userId)
 	helper.PanicIfError(err)
 	defer rows.Close()

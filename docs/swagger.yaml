@@ -67,6 +67,8 @@ definitions:
         type: integer
       countryId:
         type: integer
+      createdAt:
+        type: string
       districtId:
         type: integer
       id:
@@ -225,7 +227,6 @@ definitions:
       villageId:
         type: integer
     required:
-    - address
     - businessCategoryId
     - cityId
     - countryId
@@ -827,47 +828,47 @@ paths:
       description: Stats Business Transaction
       parameters:
       - description: dateStarted
-        in: path
+        in: query
         name: dateStarted
         required: true
         type: string
       - description: dateEnded
-        in: path
+        in: query
         name: dateEnded
         required: true
         type: string
       - description: businessTransactionTypeId
-        in: path
+        in: query
         name: businessTransactionTypeId
         required: true
         type: integer
       - description: businessTransactionItemId
-        in: path
+        in: query
         name: businessTransactionItemId
         required: true
         type: integer
       - description: provinceId
-        in: path
+        in: query
         name: provinceId
         required: true
         type: integer
       - description: cityId
-        in: path
+        in: query
         name: cityId
         required: true
         type: integer
       - description: districtId
-        in: path
+        in: query
         name: districtId
         required: true
         type: integer
       - description: villageId
-        in: path
+        in: query
         name: villageId
         required: true
         type: integer
       - description: businessCategoryId
-        in: path
+        in: query
         name: businessCategoryId
         required: true
         type: integer

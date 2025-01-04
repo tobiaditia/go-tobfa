@@ -103,7 +103,7 @@ func TestUpdateBusinessSuccess(t *testing.T) {
 	business := buseinessRepository.Create(context.Background(), tx, domain.Business{
 		UserId:             1,
 		Name:               "111",
-		Address:            "111",
+		Address:            sql.NullString{String: "111", Valid: true},
 		BusinessCategoryId: 1,
 		CountryId:          1,
 		ProvinceId:         1,
@@ -156,7 +156,7 @@ func TestUpdateBusinessErrorValidation(t *testing.T) {
 	business := buseinessRepository.Create(context.Background(), tx, domain.Business{
 		UserId:             1,
 		Name:               "111",
-		Address:            "111",
+		Address:            sql.NullString{String: "111", Valid: true},
 		BusinessCategoryId: 1,
 		CountryId:          1,
 		ProvinceId:         1,
@@ -207,7 +207,7 @@ func TestGetBusinessSuccess(t *testing.T) {
 	buseinessRepository.Create(context.Background(), tx, domain.Business{
 		UserId:             1,
 		Name:               "111",
-		Address:            "111",
+		Address:            sql.NullString{String: "111", Valid: true},
 		BusinessCategoryId: 1,
 		CountryId:          1,
 		ProvinceId:         1,
@@ -250,7 +250,7 @@ func TestFindBusinessSuccess(t *testing.T) {
 	business := buseinessRepository.Create(context.Background(), tx, domain.Business{
 		UserId:             1,
 		Name:               "111",
-		Address:            "111",
+		Address:            sql.NullString{String: "111", Valid: true},
 		BusinessCategoryId: 1,
 		CountryId:          1,
 		ProvinceId:         1,
@@ -317,7 +317,7 @@ func TestDeleteBusinessSuccess(t *testing.T) {
 	business := buseinessRepository.Create(context.Background(), tx, domain.Business{
 		UserId:             1,
 		Name:               "111",
-		Address:            "111",
+		Address:            sql.NullString{String: "111", Valid: true},
 		BusinessCategoryId: 1,
 		CountryId:          1,
 		ProvinceId:         1,

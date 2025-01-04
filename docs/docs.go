@@ -747,63 +747,63 @@ const docTemplate = `{
                         "type": "string",
                         "description": "dateStarted",
                         "name": "dateStarted",
-                        "in": "path",
+                        "in": "query",
                         "required": true
                     },
                     {
                         "type": "string",
                         "description": "dateEnded",
                         "name": "dateEnded",
-                        "in": "path",
+                        "in": "query",
                         "required": true
                     },
                     {
                         "type": "integer",
                         "description": "businessTransactionTypeId",
                         "name": "businessTransactionTypeId",
-                        "in": "path",
+                        "in": "query",
                         "required": true
                     },
                     {
                         "type": "integer",
                         "description": "businessTransactionItemId",
                         "name": "businessTransactionItemId",
-                        "in": "path",
+                        "in": "query",
                         "required": true
                     },
                     {
                         "type": "integer",
                         "description": "provinceId",
                         "name": "provinceId",
-                        "in": "path",
+                        "in": "query",
                         "required": true
                     },
                     {
                         "type": "integer",
                         "description": "cityId",
                         "name": "cityId",
-                        "in": "path",
+                        "in": "query",
                         "required": true
                     },
                     {
                         "type": "integer",
                         "description": "districtId",
                         "name": "districtId",
-                        "in": "path",
+                        "in": "query",
                         "required": true
                     },
                     {
                         "type": "integer",
                         "description": "villageId",
                         "name": "villageId",
-                        "in": "path",
+                        "in": "query",
                         "required": true
                     },
                     {
                         "type": "integer",
                         "description": "businessCategoryId",
                         "name": "businessCategoryId",
-                        "in": "path",
+                        "in": "query",
                         "required": true
                     }
                 ],
@@ -1230,6 +1230,9 @@ const docTemplate = `{
                 "countryId": {
                     "type": "integer"
                 },
+                "createdAt": {
+                    "type": "string"
+                },
                 "districtId": {
                     "type": "integer"
                 },
@@ -1433,7 +1436,6 @@ const docTemplate = `{
         "web.BusinessUpdateRequest": {
             "type": "object",
             "required": [
-                "address",
                 "businessCategoryId",
                 "cityId",
                 "countryId",

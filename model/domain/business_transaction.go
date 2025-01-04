@@ -1,5 +1,7 @@
 package domain
 
+import "time"
+
 type BusinessTransaction struct {
 	Id                        int
 	BusinessId                int
@@ -7,7 +9,7 @@ type BusinessTransaction struct {
 	BusinessTransactionItemId int
 	Total                     int
 	Multiplier                int
-	Date                      string
+	Date                      time.Time
 	Description               string
 	CreatedAt                 string
 	UpdatedAt                 string

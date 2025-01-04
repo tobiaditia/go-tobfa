@@ -1,6 +1,8 @@
 package domain
 
+import "time"
+
 type Stat struct {
-	Date  string
+	Date  time.Time
 	Total int
 }
