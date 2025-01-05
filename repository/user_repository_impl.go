@@ -17,26 +17,17 @@ func NewUserRepository() UserRepository {
 
 func (repository *UserRepositoryImpl) FindById(ctx context.Context, tx *sql.Tx, userId int) (domain.User, error) {
 	sql := "select * from users where id = ?"
-	rows, err := tx.QueryContext(ctx, sql, userId)
-	helper.PanicIfError(err)
-	defer rows.Close()
-
 	user := domain.User{}
+	err := tx.QueryRowContext(ctx, sql, userId).Scan(&user.Id,
+		&user.Name,
+		&user.Email,
+		&user.Password,
+		&user.Handphone,
+		&user.CreatedAt,
+		&user.UpdatedAt)
 
-	if rows.Next() {
-		err := rows.Scan(
-			&user.Id,
-			&user.Name,
-			&user.Email,
-			&user.Password,
-			&user.Handphone,
-			&user.CreatedAt,
-			&user.UpdatedAt)
-		helper.PanicIfError(err)
-		return user, nil
-	} else {
-		return user, errors.New("not found data")
-	}
+	helper.PanicIfError(err)
+	return user, err
 }
 
 func (repository *UserRepositoryImpl) FindByEmail(ctx context.Context, tx *sql.Tx, email string) (domain.User, error) {

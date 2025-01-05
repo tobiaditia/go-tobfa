@@ -1,6 +1,7 @@
 package exception
 
 import (
+	"database/sql"
 	"fmt"
 	"go-tobfa/helper"
 	"go-tobfa/model/web"
@@ -93,8 +94,9 @@ func alreadyExistError(writer http.ResponseWriter, err interface{}) bool {
 }
 
 func notFoundError(writer http.ResponseWriter, err interface{}) bool {
-	exception, ok := err.(NotFoundError) //cek apakah err nya bertipe NotFoundError
-	if ok {
+	exception, ok := err.(NotFoundError)  //cek apakah err nya bertipe NotFoundError
+	errorSqlNoRow := err == sql.ErrNoRows //cek apakah err nya bertipe ErrNoRows, ErrNoRows adalah kembalian dari QueryRowContext jika data kosong
+	if ok || errorSqlNoRow {
 		writer.Header().Set("Content-Type", "application/json")
 		writer.WriteHeader(http.StatusNotFound)
 
