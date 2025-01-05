@@ -5,8 +5,10 @@ import (
 	"go-tobfa/helper"
 	"go-tobfa/model/web"
 	"net/http"
+	"os"
 
 	"github.com/go-playground/validator/v10"
+	"github.com/sirupsen/logrus"
 )
 
 func ErrorHandler(writer http.ResponseWriter, request *http.Request, err interface{}) {
@@ -25,7 +27,7 @@ func ErrorHandler(writer http.ResponseWriter, request *http.Request, err interfa
 		return
 	}
 
-	internalServerError(writer, err)
+	internalServerError(writer, request, err)
 }
 
 func validationError(writer http.ResponseWriter, err interface{}) bool {
@@ -109,7 +111,15 @@ func notFoundError(writer http.ResponseWriter, err interface{}) bool {
 	}
 }
 
-func internalServerError(writer http.ResponseWriter, err interface{}) {
+func internalServerError(writer http.ResponseWriter, request *http.Request, err interface{}) {
+
+	logger := logrus.New()
+	file, _ := os.OpenFile("logs.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
+	logger.SetOutput(file)
+	logger.WithFields(logrus.Fields{
+		"path": request.RequestURI,
+	}).Error(err)
+
 	writer.Header().Set("Content-Type", "application/json")
 	writer.WriteHeader(http.StatusInternalServerError)
 

@@ -1,0 +1,41 @@
+# Binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.out
+
+# Build artifacts
+/build/
+
+# Dependency directories (if using vendoring)
+vendor/
+
+# Go Modules
+go.sum
+
+# IDE and editor specific files
+.vscode/
+.idea/
+*.iml
+
+# Logs and debugging
+*.log
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+*.bak
+
+# Coverage files
+*.coverprofile
+*.cov
+
+# Generated files
+gen/
