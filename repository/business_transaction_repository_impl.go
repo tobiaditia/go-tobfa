@@ -31,7 +31,7 @@ func (repository *BusinessTransactionRepositoryImpl) FindAll(ctx context.Context
 			&businessTransaction.BusinessTransactionTypeId,
 			&businessTransaction.BusinessTransactionItemId,
 			&businessTransaction.Total,
-			&businessTransaction.Multiplier,
+			&businessTransaction.Quantity,
 			&businessTransaction.Date,
 			&businessTransaction.Description,
 			&businessTransaction.CreatedAt,
@@ -58,7 +58,7 @@ func (repository *BusinessTransactionRepositoryImpl) FindById(ctx context.Contex
 			&businessTransaction.BusinessTransactionTypeId,
 			&businessTransaction.BusinessTransactionItemId,
 			&businessTransaction.Total,
-			&businessTransaction.Multiplier,
+			&businessTransaction.Quantity,
 			&businessTransaction.Date,
 			&businessTransaction.Description,
 			&businessTransaction.CreatedAt,
@@ -85,7 +85,7 @@ func (repository *BusinessTransactionRepositoryImpl) FindByBusiness(ctx context.
 			&businessTransaction.BusinessTransactionTypeId,
 			&businessTransaction.BusinessTransactionItemId,
 			&businessTransaction.Total,
-			&businessTransaction.Multiplier,
+			&businessTransaction.Quantity,
 			&businessTransaction.Date,
 			&businessTransaction.Description,
 			&businessTransaction.CreatedAt,
@@ -105,7 +105,7 @@ func (repository *BusinessTransactionRepositoryImpl) FindForStats(ctx context.Co
 				bt.business_transaction_type_id, 
 				bt.business_transaction_item_id, 
 				bt.total, 
-				bt.multiplier, 
+				bt.Quantity, 
 				bt.date, 
 				bt.description, 
 				bt.created_at, 
@@ -151,7 +151,7 @@ func (repository *BusinessTransactionRepositoryImpl) FindForStats(ctx context.Co
 			&businessTransaction.BusinessTransactionTypeId,
 			&businessTransaction.BusinessTransactionItemId,
 			&businessTransaction.Total,
-			&businessTransaction.Multiplier,
+			&businessTransaction.Quantity,
 			&businessTransaction.Date,
 			&businessTransaction.Description,
 			&businessTransaction.CreatedAt,
@@ -165,8 +165,8 @@ func (repository *BusinessTransactionRepositoryImpl) FindForStats(ctx context.Co
 }
 
 func (repository *BusinessTransactionRepositoryImpl) Create(ctx context.Context, tx *sql.Tx, businessTransaction domain.BusinessTransaction) domain.BusinessTransaction {
-	sql := "insert into business_transactions (business_id, business_transaction_type_id, business_transaction_item_id, total, multiplier, date, description, created_at, updated_at) values (?,?,?,?,?,?,?, NOW(), NOW())"
-	result, err := tx.ExecContext(ctx, sql, businessTransaction.BusinessId, businessTransaction.BusinessTransactionTypeId, businessTransaction.BusinessTransactionItemId, businessTransaction.Total, businessTransaction.Multiplier, businessTransaction.Date, businessTransaction.Description)
+	sql := "insert into business_transactions (business_id, business_transaction_type_id, business_transaction_item_id, total, Quantity, date, description, created_at, updated_at) values (?,?,?,?,?,?,?, NOW(), NOW())"
+	result, err := tx.ExecContext(ctx, sql, businessTransaction.BusinessId, businessTransaction.BusinessTransactionTypeId, businessTransaction.BusinessTransactionItemId, businessTransaction.Total, businessTransaction.Quantity, businessTransaction.Date, businessTransaction.Description)
 	helper.PanicIfError(err)
 
 	id, err := result.LastInsertId()
@@ -177,8 +177,8 @@ func (repository *BusinessTransactionRepositoryImpl) Create(ctx context.Context,
 }
 
 func (repository *BusinessTransactionRepositoryImpl) Update(ctx context.Context, tx *sql.Tx, businessTransaction domain.BusinessTransaction) domain.BusinessTransaction {
-	sql := "update business_transactions set business_id = ?, business_transaction_type_id = ?, business_transaction_item_id = ?, total = ?, multiplier = ?, date = ?, description = ?, updated_at = NOW() where id = ?"
-	_, err := tx.ExecContext(ctx, sql, businessTransaction.BusinessId, businessTransaction.BusinessTransactionTypeId, businessTransaction.BusinessTransactionItemId, businessTransaction.Total, businessTransaction.Multiplier, businessTransaction.Date, businessTransaction.Description, businessTransaction.Id)
+	sql := "update business_transactions set business_id = ?, business_transaction_type_id = ?, business_transaction_item_id = ?, total = ?, Quantity = ?, date = ?, description = ?, updated_at = NOW() where id = ?"
+	_, err := tx.ExecContext(ctx, sql, businessTransaction.BusinessId, businessTransaction.BusinessTransactionTypeId, businessTransaction.BusinessTransactionItemId, businessTransaction.Total, businessTransaction.Quantity, businessTransaction.Date, businessTransaction.Description, businessTransaction.Id)
 	helper.PanicIfError(err)
 
 	return businessTransaction

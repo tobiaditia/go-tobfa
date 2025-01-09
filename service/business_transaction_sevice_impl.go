@@ -122,7 +122,7 @@ func (service *BusinessTransactionServiceImpl) Create(ctx context.Context, reque
 		BusinessTransactionTypeId: request.BusinessTransactionTypeId,
 		BusinessTransactionItemId: request.BusinessTransactionItemId,
 		Total:                     request.Total,
-		Multiplier:                request.Multiplier,
+		Quantity:                  request.Quantity,
 		Date:                      date,
 		Description:               request.Description,
 	}
@@ -155,7 +155,7 @@ func (service *BusinessTransactionServiceImpl) Update(ctx context.Context, reque
 	businessTransaction.BusinessTransactionTypeId = request.BusinessTransactionTypeId
 	businessTransaction.BusinessTransactionItemId = request.BusinessTransactionItemId
 	businessTransaction.Total = request.Total
-	businessTransaction.Multiplier = request.Multiplier
+	businessTransaction.Quantity = request.Quantity
 	businessTransaction.Date = date
 	businessTransaction.Description = request.Description
 

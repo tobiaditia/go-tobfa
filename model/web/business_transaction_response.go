@@ -8,7 +8,7 @@ type BusinessTransactionResponse struct {
 	BusinessTransactionTypeId int                             `json:"businessTransactionTypeId"`
 	BusinessTransactionItemId int                             `json:"businessTransactionItemId"`
 	Total                     int                             `json:"total"`
-	Multiplier                int                             `json:"multiplier"`
+	Quantity                  int                             `json:"quantity"`
 	Date                      time.Time                       `json:"date"`
 	Description               string                          `json:"description"`
 	BusinessTransactionItem   BusinessTransactionItemResponse `json:"businessTransactionItem"`

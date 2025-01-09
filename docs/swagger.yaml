@@ -125,7 +125,7 @@ definitions:
         type: string
       description:
         type: string
-      multiplier:
+      quantity:
         type: integer
       total:
         type: integer
@@ -135,7 +135,7 @@ definitions:
     - businessTransactionTypeId
     - date
     - description
-    - multiplier
+    - quantity
     - total
     type: object
   web.BusinessTransactionItemResponse:
@@ -161,7 +161,7 @@ definitions:
         type: string
       id:
         type: integer
-      multiplier:
+      quantity:
         type: integer
       total:
         type: integer
@@ -191,7 +191,7 @@ definitions:
         type: string
       id:
         type: integer
-      multiplier:
+      quantity:
         type: integer
       total:
         type: integer
@@ -201,7 +201,7 @@ definitions:
     - businessTransactionTypeId
     - date
     - description
-    - multiplier
+    - quantity
     - total
     type: object
   web.BusinessUpdateRequest:

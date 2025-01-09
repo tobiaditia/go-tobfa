@@ -7,7 +7,8 @@ require (
 	github.com/go-sql-driver/mysql v1.8.1
 	github.com/gorilla/schema v1.4.1
 	github.com/julienschmidt/httprouter v1.3.0
-	github.com/stretchr/testify v1.9.0
+	github.com/sirupsen/logrus v1.9.3
+	github.com/stretchr/testify v1.10.0
 	github.com/swaggo/http-swagger v1.3.4
 	github.com/swaggo/swag v1.16.4
 )
@@ -27,7 +28,6 @@ require (
 	github.com/leodido/go-urn v1.4.0 // indirect
 	github.com/mailru/easyjson v0.9.0 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
-	github.com/sirupsen/logrus v1.9.3 // indirect
 	github.com/swaggo/files v1.0.1 // indirect
 	golang.org/x/crypto v0.31.0 // indirect
 	golang.org/x/net v0.33.0 // indirect

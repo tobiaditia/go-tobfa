@@ -8,7 +8,7 @@ type BusinessTransaction struct {
 	BusinessTransactionTypeId int
 	BusinessTransactionItemId int
 	Total                     int
-	Multiplier                int
+	Quantity                  int
 	Date                      time.Time
 	Description               string
 	CreatedAt                 string

@@ -77,7 +77,7 @@ func ToBusinessTransactionResponse(businessTransaction domain.BusinessTransactio
 		BusinessTransactionTypeId: businessTransaction.BusinessTransactionTypeId,
 		BusinessTransactionItemId: businessTransaction.BusinessTransactionItemId,
 		Total:                     businessTransaction.Total,
-		Multiplier:                businessTransaction.Multiplier,
+		Quantity:                  businessTransaction.Quantity,
 		Date:                      businessTransaction.Date,
 		Description:               businessTransaction.Description,
 	}

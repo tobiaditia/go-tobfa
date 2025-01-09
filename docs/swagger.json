@@ -1301,7 +1301,7 @@
                 "businessTransactionTypeId",
                 "date",
                 "description",
-                "multiplier",
+                "quantity",
                 "total"
             ],
             "properties": {
@@ -1320,7 +1320,7 @@
                 "description": {
                     "type": "string"
                 },
-                "multiplier": {
+                "quantity": {
                     "type": "integer"
                 },
                 "total": {
@@ -1363,7 +1363,7 @@
                 "id": {
                     "type": "integer"
                 },
-                "multiplier": {
+                "quantity": {
                     "type": "integer"
                 },
                 "total": {
@@ -1396,7 +1396,7 @@
                 "businessTransactionTypeId",
                 "date",
                 "description",
-                "multiplier",
+                "quantity",
                 "total"
             ],
             "properties": {
@@ -1418,7 +1418,7 @@
                 "id": {
                     "type": "integer"
                 },
-                "multiplier": {
+                "quantity": {
                     "type": "integer"
                 },
                 "total": {

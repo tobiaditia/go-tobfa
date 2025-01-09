@@ -1308,7 +1308,7 @@ const docTemplate = `{
                 "businessTransactionTypeId",
                 "date",
                 "description",
-                "multiplier",
+                "quantity",
                 "total"
             ],
             "properties": {
@@ -1327,7 +1327,7 @@ const docTemplate = `{
                 "description": {
                     "type": "string"
                 },
-                "multiplier": {
+                "quantity": {
                     "type": "integer"
                 },
                 "total": {
@@ -1370,7 +1370,7 @@ const docTemplate = `{
                 "id": {
                     "type": "integer"
                 },
-                "multiplier": {
+                "quantity": {
                     "type": "integer"
                 },
                 "total": {
@@ -1403,7 +1403,7 @@ const docTemplate = `{
                 "businessTransactionTypeId",
                 "date",
                 "description",
-                "multiplier",
+                "quantity",
                 "total"
             ],
             "properties": {
@@ -1425,7 +1425,7 @@ const docTemplate = `{
                 "id": {
                     "type": "integer"
                 },
-                "multiplier": {
+                "quantity": {
                     "type": "integer"
                 },
                 "total": {
