@@ -68,6 +68,7 @@ func reformatErrMsg(validationErrors validator.ValidationErrors) []string {
 		default:
 			message = fmt.Sprintf("Field '%s' failed on the '%s' tag", field, tag)
 		}
+		// message = fmt.Sprintf("error", field, "on tag", tag, "with error", err.Error())
 
 		errors = append(errors, message)
 	}
