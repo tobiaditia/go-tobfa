@@ -5,6 +5,7 @@ import (
 
 	"github.com/go-playground/validator/v10"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/spf13/viper"
 
 	"go-tobfa/app"
 	"go-tobfa/controller"
@@ -25,7 +26,12 @@ import (
 
 // @securityDefinitions.basic	BasicAuth
 func main() {
-	db := app.NewDB()
+	config := viper.New()
+	config.SetConfigFile("config.env")
+	err := config.ReadInConfig()
+	helper.PanicIfError(err)
+
+	db := app.NewDB(config)
 	validate := validator.New()
 
 	controllers := controller.Controller{
@@ -43,6 +49,6 @@ func main() {
 		Handler: middleware.NewAuthMiddleware(router),
 	}
 
-	err := server.ListenAndServe()
+	err = server.ListenAndServe()
 	helper.PanicIfError(err)
 }
