@@ -7,9 +7,10 @@ import (
 )
 
 type UserRepository interface {
-	FindById(ctx context.Context, tx *sql.Tx, businessId int) (domain.User, error)
+	FindById(ctx context.Context, tx *sql.Tx, userId int) (domain.User, error)
 	FindByEmail(ctx context.Context, tx *sql.Tx, email string) (domain.User, error)
-	Create(ctx context.Context, tx *sql.Tx, business domain.User) domain.User
-	Update(ctx context.Context, tx *sql.Tx, business domain.User) domain.User
-	Delete(ctx context.Context, tx *sql.Tx, business domain.User)
+	Create(ctx context.Context, tx *sql.Tx, user domain.User) domain.User
+	Update(ctx context.Context, tx *sql.Tx, user domain.User) domain.User
+	UpdatePassword(ctx context.Context, tx *sql.Tx, user domain.User) domain.User
+	Delete(ctx context.Context, tx *sql.Tx, user domain.User)
 }

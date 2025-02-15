@@ -12,8 +12,11 @@ import (
 func NewRouter(controllers controller.Controller) *httprouter.Router {
 	router := httprouter.New()
 
+	router.POST("/api/authentication/login", controllers.Authentication.Login)
+
 	router.POST("/api/users", controllers.User.Create)
 	router.PUT("/api/users/:id", controllers.User.Update)
+	router.PUT("/api/users/:id/password", controllers.User.UpdatePassword)
 	router.GET("/api/users/:id", controllers.User.FindById)
 	router.DELETE("/api/users/:id", controllers.User.Delete)
 

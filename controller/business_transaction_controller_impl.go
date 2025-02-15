@@ -39,6 +39,7 @@ func (controller BusinessTransactionControllerImpl) FindAll(writer http.Response
 // @Param        id   path      int  true  "ID"
 // @Success      200  {object}  web.WebResponse{data=web.BusinessTransactionResponse}
 // @Router       /businessTransactions/{id} [get]
+// @Security     BearerAuth
 func (controller BusinessTransactionControllerImpl) FindById(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	businessTransactionId := params.ByName("id")
 	id, err := strconv.Atoi(businessTransactionId)
@@ -62,6 +63,7 @@ func (controller BusinessTransactionControllerImpl) FindById(writer http.Respons
 // @Param        id   path      int  true  "Business ID"
 // @Success      200  {object}  web.WebResponse{data=[]web.BusinessTransactionResponse}
 // @Router       /businessTransactions/{id}/business [get]
+// @Security     BearerAuth
 func (controller BusinessTransactionControllerImpl) FindByBusiness(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	businessId := params.ByName("id")
 	id, err := strconv.Atoi(businessId)
@@ -93,6 +95,7 @@ func (controller BusinessTransactionControllerImpl) FindByBusiness(writer http.R
 // @Param        businessCategoryId   query      int  true  "businessCategoryId"
 // @Success      200  {object}  web.WebResponse{data=[]web.BusinessTransactionStatsResponse}
 // @Router       /stats/businessTransactions [get]
+// @Security     BearerAuth
 func (controller BusinessTransactionControllerImpl) Stats(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	businessTransactionStatGetRequest := web.BusinessTransactionStatsGetRequest{}
 	helper.ReadFromURLQuery(request, &businessTransactionStatGetRequest)
@@ -115,6 +118,7 @@ func (controller BusinessTransactionControllerImpl) Stats(writer http.ResponseWr
 // @Param        body	body		web.BusinessTransactionCreateRequest	true	"Body"
 // @Success      200  {object}  web.WebResponse{data=web.BusinessTransactionResponse}
 // @Router       /businessTransactions [post]
+// @Security     BearerAuth
 func (controller BusinessTransactionControllerImpl) Create(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	businessTransactionCreateRequest := web.BusinessTransactionCreateRequest{}
 	helper.ReadFromRequestBody(request, &businessTransactionCreateRequest)
@@ -139,6 +143,7 @@ func (controller BusinessTransactionControllerImpl) Create(writer http.ResponseW
 // @Param        body	body		web.BusinessTransactionUpdateRequest	true	"Body"
 // @Success      200  {object}  web.WebResponse{data=web.BusinessTransactionResponse}
 // @Router       /businessTransactions/{id} [put]
+// @Security     BearerAuth
 func (controller BusinessTransactionControllerImpl) Update(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	businessTransactionUpdateRequest := web.BusinessTransactionUpdateRequest{}
 	helper.ReadFromRequestBody(request, &businessTransactionUpdateRequest)
@@ -166,6 +171,7 @@ func (controller BusinessTransactionControllerImpl) Update(writer http.ResponseW
 // @Param        id   path      int  true  "ID"
 // @Success      200  {object}  web.WebResponse
 // @Router       /businessTransactions/{id} [delete]
+// @Security     BearerAuth
 func (controller BusinessTransactionControllerImpl) Delete(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	businessId := params.ByName("id")
 	id, err := strconv.Atoi(businessId)

@@ -1,6 +1,9 @@
 Catatan DEV:
 1. Penggunaiaan pointer *, digunakan apabila type nya adalah Struct kalau Interface tidak perlu. Referensi [Title](https://dasarpemrogramangolang.novalagung.com/A-pointer.html)
 
+SWAGGER
+swag init
+
 CLI
 1. Goose
 buat file

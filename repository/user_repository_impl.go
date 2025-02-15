@@ -74,6 +74,14 @@ func (repository *UserRepositoryImpl) Update(ctx context.Context, tx *sql.Tx, us
 	return user
 }
 
+func (repository *UserRepositoryImpl) UpdatePassword(ctx context.Context, tx *sql.Tx, user domain.User) domain.User {
+	sql := "update users set password = ?, updated_at = NOW() where id = ?"
+	_, err := tx.ExecContext(ctx, sql, user.Password, user.Id)
+	helper.PanicIfError(err)
+
+	return user
+}
+
 func (repository *UserRepositoryImpl) Delete(ctx context.Context, tx *sql.Tx, user domain.User) {
 	sql := "delete from users where id = ?"
 	_, err := tx.ExecContext(ctx, sql, user.Id)

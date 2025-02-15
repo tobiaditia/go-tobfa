@@ -28,6 +28,7 @@ func NewBusinessController(businessService service.BusinessService) BusinessCont
 // @Param        body	body		web.BusinessCreateRequest	true	"Body"
 // @Success      200  {object}  web.WebResponse{data=web.BusinessResponse}
 // @Router       /businesses [post]
+// @Security     BearerAuth
 func (controller BusinessControllerImpl) Create(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	businessCreateRequest := web.BusinessCreateRequest{}
 	helper.ReadFromRequestBody(request, &businessCreateRequest)
@@ -52,6 +53,7 @@ func (controller BusinessControllerImpl) Create(writer http.ResponseWriter, requ
 // @Param        body	body		web.BusinessUpdateRequest	true	"Body"
 // @Success      200  {object}  web.WebResponse{data=web.BusinessResponse}
 // @Router       /businesses/{id} [put]
+// @Security     BearerAuth
 func (controller BusinessControllerImpl) Update(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	businessUpdateRequest := web.BusinessUpdateRequest{}
 	helper.ReadFromRequestBody(request, &businessUpdateRequest)
@@ -78,6 +80,7 @@ func (controller BusinessControllerImpl) Update(writer http.ResponseWriter, requ
 // @Param        id   path      int  true  "ID"
 // @Success      200  {object}  web.WebResponse
 // @Router       /businesses/{id} [delete]
+// @Security     BearerAuth
 func (controller BusinessControllerImpl) Delete(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	businessId := params.ByName("id")
 	id, err := strconv.Atoi(businessId)
@@ -100,6 +103,7 @@ func (controller BusinessControllerImpl) Delete(writer http.ResponseWriter, requ
 // @Param        id   path      int  true  "ID"
 // @Success      200  {object}  web.WebResponse{data=web.BusinessResponse}
 // @Router       /businesses/{id} [get]
+// @Security     BearerAuth
 func (controller BusinessControllerImpl) FindById(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	businessId := params.ByName("id")
 	id, err := strconv.Atoi(businessId)
@@ -122,6 +126,7 @@ func (controller BusinessControllerImpl) FindById(writer http.ResponseWriter, re
 // @Produce      json
 // @Success      200  {object}  web.WebResponse{data=[]web.BusinessResponse}
 // @Router       /businesses [get]
+// @Security     BearerAuth
 func (controller BusinessControllerImpl) FindAll(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	businessResponses := controller.BusinessService.FindAll(request.Context())
 	webResponse := web.WebResponse{
@@ -145,6 +150,7 @@ func (controller BusinessControllerImpl) FindAll(writer http.ResponseWriter, req
 // @Param        businessTransactionItemIds   path      string  false  "businessTransactionItemIds, sparated by coma"
 // @Success      200  {object}  web.WebResponse{data=web.BusinessStatsResponse}
 // @Router       /stats/business [get]
+// @Security     BearerAuth
 func (controller BusinessControllerImpl) Stats(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	businessStatsGetRequest := web.BusinessStatsGetRequest{}
 	helper.ReadFromURLQuery(request, &businessStatsGetRequest)

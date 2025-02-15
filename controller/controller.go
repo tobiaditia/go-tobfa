@@ -1,6 +1,7 @@
 package controller
 
 type Controller struct {
+	Authentication      AuthenticationController
 	User                UserController
 	Location            LocationController
 	Business            BusinessController

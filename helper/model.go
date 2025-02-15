@@ -191,3 +191,10 @@ func ToVillageResponses(villages []domain.Village) []web.VillageResponse {
 
 	return villageResponses
 }
+
+func ToAuthResponse(user domain.User, token string) web.AuthResponse {
+	return web.AuthResponse{
+		Token: token,
+		User:  ToUserResponse(user),
+	}
+}

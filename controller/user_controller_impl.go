@@ -55,6 +55,7 @@ func (controller UserControllerImpl) Create(writer http.ResponseWriter, request 
 // @Param        body	body		web.UserUpdateRequest	true	"Body"
 // @Success      200  {object}  web.WebResponse{data=web.UserResponse}
 // @Router       /users/{id} [put]
+// @Security     BearerAuth
 func (controller UserControllerImpl) Update(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	userUpdateRequest := web.UserUpdateRequest{}
 	helper.ReadFromRequestBody(request, &userUpdateRequest)
@@ -74,6 +75,34 @@ func (controller UserControllerImpl) Update(writer http.ResponseWriter, request 
 }
 
 // @Tags         User
+// @Summary      Update Password User
+// @Description  Update Password User
+// @Accept       json
+// @Produce      json
+// @Param        id   path      int  true  "ID"
+// @Param        body	body		web.UserUpdatePasswordRequest	true	"Body"
+// @Success      200  {object}  web.WebResponse{data=web.UserResponse}
+// @Router       /users/{id}/password [put]
+// @Security     BearerAuth
+func (controller UserControllerImpl) UpdatePassword(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
+	userUpdatePasswordRequest := web.UserUpdatePasswordRequest{}
+	helper.ReadFromRequestBody(request, &userUpdatePasswordRequest)
+
+	userId := params.ByName("id")
+	id, err := strconv.Atoi(userId)
+	helper.PanicIfError(err)
+
+	userResponse := controller.UserService.UpdatePassword(request.Context(), id, userUpdatePasswordRequest)
+	webResponse := web.WebResponse{
+		Code:   200,
+		Status: "OK",
+		Data:   userResponse,
+	}
+
+	helper.WriteToResponseBody(writer, webResponse)
+}
+
+// @Tags         User
 // @Summary      Delete User
 // @Description  Delete User
 // @Accept       json
@@ -81,6 +110,7 @@ func (controller UserControllerImpl) Update(writer http.ResponseWriter, request 
 // @Param        id   path      int  true  "ID"
 // @Success      200  {object}  web.WebResponse
 // @Router       /users/{id} [delete]
+// @Security     BearerAuth
 func (controller UserControllerImpl) Delete(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	userId := params.ByName("id")
 	id, err := strconv.Atoi(userId)
@@ -103,6 +133,7 @@ func (controller UserControllerImpl) Delete(writer http.ResponseWriter, request 
 // @Param        id   path      int  true  "ID"
 // @Success      200  {object}  web.WebResponse{data=web.UserResponse}
 // @Router       /users/{id} [get]
+// @Security     BearerAuth
 func (controller UserControllerImpl) FindById(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	userId := params.ByName("id")
 	id, err := strconv.Atoi(userId)

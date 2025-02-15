@@ -126,8 +126,10 @@ definitions:
       description:
         type: string
       quantity:
+        minimum: 0
         type: integer
       total:
+        minimum: 0
         type: integer
     required:
     - businessId
@@ -192,8 +194,10 @@ definitions:
       id:
         type: integer
       quantity:
+        minimum: 0
         type: integer
       total:
+        minimum: 0
         type: integer
     required:
     - businessId
@@ -263,6 +267,18 @@ definitions:
         type: integer
       name:
         type: string
+    type: object
+  web.LoginRequest:
+    properties:
+      email:
+        example: me@tobfa.id
+        type: string
+      password:
+        example: "12345678"
+        type: string
+    required:
+    - email
+    - password
     type: object
   web.ProvinceResponse:
     properties:
@@ -346,6 +362,14 @@ definitions:
       name:
         type: string
     type: object
+  web.UserUpdatePasswordRequest:
+    properties:
+      password:
+        example: "12345678"
+        type: string
+    required:
+    - password
+    type: object
   web.UserUpdateRequest:
     properties:
       handphone:
@@ -393,6 +417,78 @@ info:
   title: Tobfa API
   version: "1.0"
 paths:
+  /authentication/login:
+    post:
+      consumes:
+      - application/json
+      description: Login
+      parameters:
+      - description: Body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/web.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/web.WebResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/web.UserResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            allOf:
+            - $ref: '#/definitions/web.WebResponse'
+            - properties:
+                code:
+                  type: integer
+                data:
+                  items:
+                    type: string
+                  type: array
+                status:
+                  type: string
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            allOf:
+            - $ref: '#/definitions/web.WebResponse'
+            - properties:
+                code:
+                  type: integer
+                data:
+                  items:
+                    type: string
+                  type: array
+                status:
+                  type: string
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            allOf:
+            - $ref: '#/definitions/web.WebResponse'
+            - properties:
+                code:
+                  type: integer
+                data:
+                  items:
+                    type: string
+                  type: array
+                status:
+                  type: string
+              type: object
+      summary: Login
+      tags:
+      - Authentication
   /businessCategories:
     get:
       consumes:
@@ -439,6 +535,8 @@ paths:
                 data:
                   $ref: '#/definitions/web.BusinessTransactionResponse'
               type: object
+      security:
+      - BearerAuth: []
       summary: Create Business Transaction
       tags:
       - Business Transaction
@@ -460,6 +558,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/web.WebResponse'
+      security:
+      - BearerAuth: []
       summary: Delete Business Transaction
       tags:
       - Business Transaction
@@ -485,6 +585,8 @@ paths:
                 data:
                   $ref: '#/definitions/web.BusinessTransactionResponse'
               type: object
+      security:
+      - BearerAuth: []
       summary: Find Business Transaction
       tags:
       - Business Transaction
@@ -516,6 +618,8 @@ paths:
                 data:
                   $ref: '#/definitions/web.BusinessTransactionResponse'
               type: object
+      security:
+      - BearerAuth: []
       summary: Update Business Transaction
       tags:
       - Business Transaction
@@ -544,6 +648,8 @@ paths:
                     $ref: '#/definitions/web.BusinessTransactionResponse'
                   type: array
               type: object
+      security:
+      - BearerAuth: []
       summary: Find Business Transaction
       tags:
       - Business Transaction
@@ -566,6 +672,8 @@ paths:
                     $ref: '#/definitions/web.BusinessResponse'
                   type: array
               type: object
+      security:
+      - BearerAuth: []
       summary: Get Business
       tags:
       - Business
@@ -592,6 +700,8 @@ paths:
                 data:
                   $ref: '#/definitions/web.BusinessResponse'
               type: object
+      security:
+      - BearerAuth: []
       summary: Create Business
       tags:
       - Business
@@ -613,6 +723,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/web.WebResponse'
+      security:
+      - BearerAuth: []
       summary: Delete Business
       tags:
       - Business
@@ -638,6 +750,8 @@ paths:
                 data:
                   $ref: '#/definitions/web.BusinessResponse'
               type: object
+      security:
+      - BearerAuth: []
       summary: Find Business
       tags:
       - Business
@@ -669,6 +783,8 @@ paths:
                 data:
                   $ref: '#/definitions/web.BusinessResponse'
               type: object
+      security:
+      - BearerAuth: []
       summary: Update Business
       tags:
       - Business
@@ -818,6 +934,8 @@ paths:
                 data:
                   $ref: '#/definitions/web.BusinessStatsResponse'
               type: object
+      security:
+      - BearerAuth: []
       summary: Stats Business
       tags:
       - Stat
@@ -886,6 +1004,8 @@ paths:
                     $ref: '#/definitions/web.BusinessTransactionStatsResponse'
                   type: array
               type: object
+      security:
+      - BearerAuth: []
       summary: Stats Business Transaction
       tags:
       - Stat
@@ -979,6 +1099,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/web.WebResponse'
+      security:
+      - BearerAuth: []
       summary: Delete User
       tags:
       - User
@@ -1004,6 +1126,8 @@ paths:
                 data:
                   $ref: '#/definitions/web.UserResponse'
               type: object
+      security:
+      - BearerAuth: []
       summary: Find User
       tags:
       - User
@@ -1035,7 +1159,43 @@ paths:
                 data:
                   $ref: '#/definitions/web.UserResponse'
               type: object
+      security:
+      - BearerAuth: []
       summary: Update User
+      tags:
+      - User
+  /users/{id}/password:
+    put:
+      consumes:
+      - application/json
+      description: Update Password User
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/web.UserUpdatePasswordRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/web.WebResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/web.UserResponse'
+              type: object
+      security:
+      - BearerAuth: []
+      summary: Update Password User
       tags:
       - User
   /villages/{id}:
@@ -1067,6 +1227,9 @@ paths:
       tags:
       - Location
 securityDefinitions:
-  BasicAuth:
-    type: basic
+  BearerAuth:
+    description: Gunakan format "Bearer {token}"
+    in: header
+    name: Authorization
+    type: apiKey
 swagger: "2.0"

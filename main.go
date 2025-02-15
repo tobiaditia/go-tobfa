@@ -16,15 +16,18 @@ import (
 	"go-tobfa/service"
 )
 
-//	@title			Tobfa API
-//	@version		1.0
-//	@contact.name	Tobi
-//	@contact.email	tobiaditia549@gmail.com
+// @title			Tobfa API
+// @version			1.0
+// @contact.name	Tobi
+// @contact.email	tobiaditia549@gmail.com
 
-//	@host		localhost:3000
-//	@BasePath	/api
+// @host		localhost:3000
+// @BasePath	/api
 
-// @securityDefinitions.basic	BasicAuth
+// @securityDefinitions.apikey BearerAuth
+// @in header
+// @name Authorization
+// @description Gunakan format "Bearer {token}"
 func main() {
 	config := viper.New()
 	config.SetConfigFile("config.env")
@@ -35,6 +38,7 @@ func main() {
 	validate := validator.New()
 
 	controllers := controller.Controller{
+		Authentication:      controller.NewAuthenticationController(service.NewAuthenticationService(repository.NewUserRepository(), db, validate, config)),
 		User:                controller.NewUserController(service.NewUserService(repository.NewUserRepository(), db, validate)),
 		Location:            controller.NewLocationController(service.NewLocationService(repository.NewLocationRepository(), db, validate)),
 		Business:            controller.NewBusinessController(service.NewBusinessService(repository.NewBusinessRepository(), repository.NewBusinessTransactionItemRepository(), db, validate)),
@@ -46,7 +50,7 @@ func main() {
 
 	server := http.Server{
 		Addr:    "localhost:3000",
-		Handler: middleware.NewAuthMiddleware(router),
+		Handler: middleware.NewAuthMiddleware(router, config),
 	}
 
 	err = server.ListenAndServe()
